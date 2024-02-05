@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:bookstore/homescreen.dart';
 import 'package:bookstore/signin-up/sign_in.dart';
 import 'package:bookstore/widgets/custom_button.dart';
-import 'package:bookstore/widgets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,13 +24,31 @@ class _FormSignUpCustomerState extends State<FormSignUpCustomer> {
   var isObscure = true;
 
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void _handleSignUp() async {
+    try {
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const Homepage()));
+      if (kDebugMode) {
+        print("User Created: ${userCredential.user!.uid}");
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('error: $e');
+      }
+    }
+  }
+
   void _saveItem() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      // final data = SignInModel(email: _enterEmail, password: _enteredPass);
-      // signindata.add(data);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const Homepage()));
+      // print(firstName);
+      // print(lastName);
+      // print(email);
+      // print(password);
+      _handleSignUp();
     }
   }
 
@@ -38,7 +59,6 @@ class _FormSignUpCustomerState extends State<FormSignUpCustomer> {
 
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Form(
       key: formKey,
       child: Column(
@@ -48,95 +68,202 @@ class _FormSignUpCustomerState extends State<FormSignUpCustomer> {
             children: [
               SizedBox(
                 width: width * 0.4,
-                child: CustomTextFormField(
+                child: TextFormField(
+                  cursorColor: Colors.black,
                   autovalidateMode: autovalidateMode,
-                  hintText: 'First Name',
-                  onSaved: (value) {
-                    firstName = value!;
-                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'please enter your first name';
                     }
-                    return '';
+                    return null;
                   },
-                ),
-              ),
-              Container(
-                width: width * 0.4,
-                child: CustomTextFormField(
-                  autovalidateMode: autovalidateMode,
-                  hintText: 'Last Name',
                   onSaved: (value) {
-                    lastName = value!;
+                    firstName = value!;
                   },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'please enter your last name';
-                    } else {
-                      return '';
-                    }
-                  },
+                  decoration: InputDecoration(
+                    hintText: 'First Name',
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Color(0xff2F3C50),
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Color(0xff2F3C50),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Color(0xff2F3C50),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: const BorderSide(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
               ),
+              SizedBox(
+                  width: width * 0.4,
+                  child: TextFormField(
+                    autovalidateMode: autovalidateMode,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter your last name';
+                      }
+
+                      return null;
+                    },
+                    onSaved: (value) {
+                      lastName = value!;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Last Name',
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: const BorderSide(
+                          color: Color(0xff2F3C50),
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: const BorderSide(
+                          color: Color(0xff2F3C50),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: const BorderSide(
+                          color: Color(0xff2F3C50),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: const BorderSide(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  )),
             ],
           ),
           const SizedBox(
             height: 20,
           ),
-          CustomTextFormField(
-              autovalidateMode: autovalidateMode,
-              hintText: 'email',
-              onSaved: (value) {
-                email = value!;
-              },
-              validator: (value) {
-                if (!RegExp(
-                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                    .hasMatch(value!)) {
-                  return "Please enter a valid email address";
-                }
-                return '';
-              }),
-          const SizedBox(
-            height: 10,
-          ),
-          CustomTextFormField(
+          TextFormField(
             autovalidateMode: autovalidateMode,
-            hintText: 'Password',
-            obscureText: isObscure,
-            suffixIcon: isObscure
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isObscure = !isObscure;
-                      });
-                    },
-                    icon: const Icon(Icons.visibility_off))
-                : IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isObscure = !isObscure;
-                      });
-                    },
-                    icon: const Icon(Icons.remove_red_eye)),
-            onSaved: (value) {
-              password = value!;
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (!RegExp(
+                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                  .hasMatch(value!)) {
+                return "Please enter a valid email address";
+              }
+
+              return null;
             },
+            onSaved: (value) {
+              email = value!;
+            },
+            decoration: InputDecoration(
+              hintText: 'email',
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFormField(
+            autovalidateMode: autovalidateMode,
             validator: (value) {
               if (value!.isEmpty) {
                 return "Password should not be empty";
-              } else if (!RegExp((r'^(?=.*?[A-Z])')).hasMatch(value!)) {
+              } else if (!RegExp((r'^(?=.*?[A-Z])')).hasMatch(value)) {
                 return "Password should have an uppercase letter";
-              } else if (!RegExp((r'^(?=.*?[a-z])')).hasMatch(value!)) {
+              } else if (!RegExp((r'^(?=.*?[a-z])')).hasMatch(value)) {
                 return "Password should have an lowercase letter";
-              } else if (!RegExp((r'^(?=.*?[0-9])')).hasMatch(value!)) {
+              } else if (!RegExp((r'^(?=.*?[0-9])')).hasMatch(value)) {
                 return "Password should have an number";
               } else if (value.length < 6) {
                 return "Password should  be more than 6";
               }
-              return '';
+              return null;
             },
+            onSaved: (value) {
+              password = value!;
+            },
+            obscureText: isObscure,
+            decoration: InputDecoration(
+              suffixIcon: isObscure
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isObscure = !isObscure;
+                        });
+                      },
+                      icon: const Icon(Icons.visibility_off))
+                  : IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isObscure = !isObscure;
+                        });
+                      },
+                      icon: const Icon(Icons.remove_red_eye)),
+              hintText: 'Password',
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color(0xff2F3C50),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
           const SizedBox(
             height: 20,

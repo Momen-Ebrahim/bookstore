@@ -1,10 +1,14 @@
-import 'package:bookstore/constants.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bookstore/homescreen.dart';
 import 'package:bookstore/signin-up/sign_up_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Signin extends StatefulWidget {
-  const Signin({Key? key});
+  const Signin({super.key});
 
   @override
   State<Signin> createState() => _SigninState();
@@ -15,18 +19,52 @@ class _SigninState extends State<Signin> {
   var _enterEmail = "";
   var _enteredPass = "";
   bool _isVisible = true;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void _handleSignIn() async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: _enterEmail, password: _enteredPass);
 
-  // final FirebaseAuthServices _auth = FirebaseAuthServices();
+      Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => const Homepage(),
+          ));
+
+      if (kDebugMode) {
+        print('user: $userCredential');
+      }
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text('Invalid email or password'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ok'),
+                )
+              ],
+            );
+          });
+      if (kDebugMode) {
+        print('Error Log in: $e');
+      }
+    }
+  }
 
   void _saveItem() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      _handleSignIn();
       print(_enterEmail);
       print(_enteredPass);
       // final data = SignInModel(email: _enterEmail, password: _enteredPass);
       // signindata.add(data);
-      // Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(builder: (ctx) => const Homepage()));
     }
   }
 
@@ -35,6 +73,7 @@ class _SigninState extends State<Signin> {
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
@@ -169,11 +208,6 @@ class _SigninState extends State<Signin> {
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   _saveItem();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute<void>(
-                  //       builder: (BuildContext context) => const Homepage(),
-                  //     ));
                 }
               },
               child: Container(

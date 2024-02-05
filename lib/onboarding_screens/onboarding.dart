@@ -65,7 +65,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               color: Colors.black,
                               title: "sign up",
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
                                   builder: (ctx) => const SignUpView(),
                                 ));
                                 // final pref =

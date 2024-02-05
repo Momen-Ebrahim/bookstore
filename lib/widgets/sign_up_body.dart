@@ -1,4 +1,3 @@
-import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:bookstore/widgets/custom_switch_button.dart';
 import 'package:bookstore/widgets/form_sign_up_admin.dart';
@@ -12,7 +11,6 @@ class SignUpBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView(
