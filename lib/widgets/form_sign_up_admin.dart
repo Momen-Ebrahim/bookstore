@@ -1,10 +1,12 @@
-import 'package:bookstore/homescreen.dart';
 import 'package:bookstore/signin-up/sign_in.dart';
+import 'package:bookstore/views/user_nav_bar.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FormSignUpAdmin extends StatefulWidget {
   const FormSignUpAdmin({super.key});
@@ -28,14 +30,35 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const Homepage()));
+          MaterialPageRoute(builder: (ctx) => const UserNavBar()));
       if (kDebugMode) {
         print("User Created: ${userCredential.user!.uid}");
       }
     } catch (e) {
       if (kDebugMode) {
-        print('error: $e');
+        print('errorssssssssss: $e');
       }
+    }
+  }
+
+  void signinwuthgoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+        final AuthCredential authCredential = GoogleAuthProvider.credential(
+            accessToken: googleSignInAuthentication.accessToken,
+            idToken: googleSignInAuthentication.idToken);
+        await auth.signInWithCredential(authCredential);
+        print('user signed in');
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+      }
+    } catch (e) {
+      print('error: $e');
     }
   }
 
@@ -310,7 +333,10 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                  onPressed: () {}, icon: const Icon(FontAwesomeIcons.google)),
+                  onPressed: () {
+                    signinwuthgoogle();
+                  },
+                  icon: const Icon(FontAwesomeIcons.google)),
               const SizedBox(
                 width: 20,
               ),

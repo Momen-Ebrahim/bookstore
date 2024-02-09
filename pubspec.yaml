@@ -40,6 +40,9 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   shared_preferences: ^2.2.2
   smooth_page_indicator: ^1.1.0
+  expandable_page_view: ^1.0.17
+  persistent_bottom_nav_bar: ^5.0.2
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +69,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/svg/
-    
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

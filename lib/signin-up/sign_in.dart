@@ -1,11 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:bookstore/homescreen.dart';
 import 'package:bookstore/signin-up/sign_up_view.dart';
+import 'package:bookstore/views/user_nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -28,7 +27,7 @@ class _SigninState extends State<Signin> {
       Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => const Homepage(),
+            builder: (BuildContext context) => const UserNavBar(),
           ));
 
       if (kDebugMode) {
@@ -54,6 +53,27 @@ class _SigninState extends State<Signin> {
       if (kDebugMode) {
         print('Error Log in: $e');
       }
+    }
+  }
+
+  void signinwuthgoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+        final AuthCredential authCredential = GoogleAuthProvider.credential(
+            accessToken: googleSignInAuthentication.accessToken,
+            idToken: googleSignInAuthentication.idToken);
+        await auth.signInWithCredential(authCredential);
+        print('user signed in');
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+      }
+    } catch (e) {
+      print('error: $e');
     }
   }
 
@@ -193,7 +213,9 @@ class _SigninState extends State<Signin> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    signinwuthgoogle();
+                  },
                   icon: const Icon(FontAwesomeIcons.google),
                 ),
                 const SizedBox(width: 20),
