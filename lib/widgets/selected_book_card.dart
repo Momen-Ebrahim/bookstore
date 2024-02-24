@@ -1,4 +1,5 @@
 import 'package:bookstore/views/Cart.dart';
+import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class SelectedBookCard extends StatelessWidget {
@@ -15,13 +16,21 @@ class SelectedBookCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/images/topBooks1.png',
-              height: 217,
-              width: 138,
-            ),
+          Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  'assets/images/topBooks1.png',
+                  height: 217,
+                  width: 138,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const RatingBarWidget(),
+            ],
           ),
           const SizedBox(
             width: 20,
@@ -48,13 +57,6 @@ class SelectedBookCard extends StatelessWidget {
               ),
               const SizedBox(
                 height: 10,
-              ),
-              const Text(
-                'Rating: 4.11/5',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
               ),
               const SizedBox(
                 height: 10,

@@ -1,3 +1,4 @@
+import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:bookstore/simple_bloc_observer.dart';
 import 'package:bookstore/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,19 @@ class BookStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(fontFamily: 'SofiaProBold'),
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BottomNavigationBarCubit>(
+          create: (BuildContext context) => BottomNavigationBarCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'RobotoSlab',
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
+      ),
     );
   }
 }

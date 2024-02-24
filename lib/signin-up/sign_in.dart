@@ -1,5 +1,5 @@
 import 'package:bookstore/signin-up/sign_up_view.dart';
-import 'package:bookstore/views/user_nav_bar.dart';
+import 'package:bookstore/views/user_nav_bar_m.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class _SigninState extends State<Signin> {
       Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => const UserNavBar(),
+            builder: (BuildContext context) => const UserNavigationBar(),
           ));
 
       if (kDebugMode) {
@@ -70,7 +70,7 @@ class _SigninState extends State<Signin> {
         await auth.signInWithCredential(authCredential);
         print('user signed in');
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+            MaterialPageRoute(builder: (ctx) => const UserNavigationBar()));
       }
     } catch (e) {
       print('error: $e');

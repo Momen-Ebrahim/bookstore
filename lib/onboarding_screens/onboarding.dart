@@ -49,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             child: Text(
                               'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 18,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black,
                                 fontFamily: 'Poppins',
@@ -82,7 +82,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 "you have account?",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.normal),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16),
                               ),
                               TextButton(
                                   onPressed: () {
@@ -95,6 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   },
                                   child: const Text("sign in",
                                       style: TextStyle(
+                                          fontSize: 16,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold)))
                             ],
@@ -106,7 +108,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       GestureDetector(
                           child: const Text("skip",
-                              style: TextStyle(color: Colors.black)),
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18)),
                           onTap: () {
                             _pageController.jumpToPage(2);
                           }),
@@ -123,7 +126,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           )),
                       GestureDetector(
                         child: const Text("next",
-                            style: TextStyle(color: Colors.black)),
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 18)),
                         onTap: () {
                           _pageController.nextPage(
                               duration: const Duration(milliseconds: 300),

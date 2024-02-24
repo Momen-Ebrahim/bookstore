@@ -17,42 +17,40 @@ class CategoriesView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 36,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomTextField(),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                FilterIcon(),
-              ],
-            ),
-            SizedBox(
-              height: 36,
-            ),
-            Text(
-              'Categories',
-              style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF252525)),
-            ),
-            SizedBox(
-              height: 36,
-            ),
-            CategoryGridView(categoryItems: categoryItems),
-          ],
-        ),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 36,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: CustomTextField(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              FilterIcon(),
+            ],
+          ),
+          SizedBox(
+            height: 36,
+          ),
+          Text(
+            'Categories',
+            style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF252525)),
+          ),
+          SizedBox(
+            height: 36,
+          ),
+          CategoryGridView(categoryItems: categoryItems),
+        ],
       ),
     );
   }

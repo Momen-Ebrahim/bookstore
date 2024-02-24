@@ -2,7 +2,6 @@ import 'package:bookstore/signin-up/sign_in.dart';
 import 'package:bookstore/views/user_nav_bar.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

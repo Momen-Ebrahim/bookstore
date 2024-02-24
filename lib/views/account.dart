@@ -1,4 +1,3 @@
-import 'package:bookstore/signin-up/sign_in.dart';
 import 'package:bookstore/widgets/account_details.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,11 +34,12 @@ class _AccountState extends State<Account> {
           child: Column(
             children: [
               Center(
-                  child: Image.asset(
-                'assets/images/accountpic.png',
-                height: 120,
-                width: 120,
-              )),
+                child: Image.asset(
+                  'assets/images/accountpic.png',
+                  height: 120,
+                  width: 120,
+                ),
+              ),
               SizedBox(
                 height: hight * (20 / 800),
               ),

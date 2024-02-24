@@ -32,7 +32,9 @@ class Page1 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 50),
             child: Text(
               "Reading books at anytime anywhere, save your time and data!",
-              style: TextStyle(color: Colors.black, fontSize: 15,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400),
             ),
           ),

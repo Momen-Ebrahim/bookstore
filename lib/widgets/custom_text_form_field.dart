@@ -5,14 +5,14 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
       {super.key,
       required this.hintText,
-      this.suffixIcon,
-      this.prefixIcon,
       this.onSaved,
       this.validator,
       this.obscureText = false,
-      this.autovalidateMode});
+      this.autovalidateMode,
+      this.suffixIcon,
+      this.prefixIcon});
   final String hintText;
-  final IconButton? suffixIcon;
+  final Icon? suffixIcon;
   final Icon? prefixIcon;
   final Function(String?)? onSaved;
   final String Function(String?)? validator;

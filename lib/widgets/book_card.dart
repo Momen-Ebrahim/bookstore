@@ -1,11 +1,9 @@
 import 'package:bookstore/views/selected_book_view.dart';
+import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
-class BookCard extends StatelessWidget {
-  const BookCard({
-    super.key,
-    required this.image,
-  });
+class BookCardd extends StatelessWidget {
+  const BookCardd({super.key, required this.image});
   final String image;
   @override
   Widget build(BuildContext context) {
@@ -27,63 +25,86 @@ class BookCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Image.asset(
-                  'assets/images/topBooks1.png',
-                  height: 142,
-                  width: 91,
+        child: Stack(
+          children: [
+            Positioned(
+              child: Container(
+                height: 160,
+                width: 200,
+                decoration: const ShapeDecoration(
+                  color: Color(0xFFBBBBBB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
+            ),
+            Positioned(
+              top: 10,
+              child: Image.asset(
+                image,
+                width: 200,
+                height: 150,
               ),
-              const Text(
-                'Classics',
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 15,
-                  color: Color(0xFFDEDEDE),
+            ),
+            Positioned(
+              top: 165,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Classics',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15,
+                        color: Color(0xFFDEDEDE),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    RichText(
+                      text: const TextSpan(
+                        style: TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: 'The Picture of Dorian\n Gray',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Text(
+                      'Oscar Wilde',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 15,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                    ),
+                    const Text(
+                      r'$25.00',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                    ),
+                    const RatingBarWidget(),
+                  ],
                 ),
               ),
-              const Text(
-                'The Picture of Dorian',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: Color(0xFFFFFFFF),
-                ),
-              ),
-              const Text(
-                'Gray',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: Color(0xFFFFFFFF),
-                ),
-              ),
-              const Text(
-                'Oscar Wilde',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 15,
-                  color: Color(0xFFFFFFFF),
-                ),
-              ),
-              const Text(
-                r'$25.00',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 30,
-                  color: Color(0xFFFFFFFF),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

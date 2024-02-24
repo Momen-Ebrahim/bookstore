@@ -1,5 +1,6 @@
-import 'package:bookstore/widgets/Card_Of_Cart_book.dart';
+import 'package:bookstore/widgets/card_of_cart_book.dart';
 import 'package:bookstore/widgets/custom_button.dart';
+import 'package:bookstore/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
 class Cart extends StatefulWidget {
@@ -15,14 +16,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Cart',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600)),
-          centerTitle: true,
-        ),
+        appBar: topBar('Cart'),
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(

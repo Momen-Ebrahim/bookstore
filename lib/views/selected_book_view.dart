@@ -1,7 +1,8 @@
-import 'package:bookstore/views/Cart.dart';
+import 'package:bookstore/widgets/add_comment_for_rating.dart';
 import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/selected_book_card.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SelectedBookView extends StatelessWidget {
   const SelectedBookView({super.key});
@@ -23,7 +24,7 @@ class SelectedBookView extends StatelessWidget {
           'Classics',
           style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 20,
+              fontSize: 24,
               color: Color(0xFF121212)),
         ),
         centerTitle: true,
@@ -32,17 +33,10 @@ class SelectedBookView extends StatelessWidget {
             padding: const EdgeInsets.only(right: 12),
             child: IconButton(
               icon: const Icon(
-                Icons.add_shopping_cart_outlined,
-                size: 32,
-                color: Colors.black,
+                FontAwesomeIcons.heart,
+                size: 24,
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const Cart(),
-                    ));
-              },
+              onPressed: () {},
             ),
           )
         ],
@@ -69,6 +63,10 @@ class SelectedBookView extends StatelessWidget {
                 height: 25,
               ),
               DescriptionBook(),
+              SizedBox(
+                height: 25,
+              ),
+              AddCommentForRating(),
             ],
           ),
         ),
