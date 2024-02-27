@@ -1,7 +1,4 @@
-<<<<<<< HEAD:lib/views/user_view/selected_book_view.dart
 import 'package:bookstore/models/book_card_models.dart';
-=======
->>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29:lib/views/selected_book_view.dart
 import 'package:bookstore/widgets/add_comment_for_rating.dart';
 import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/selected_book_card.dart';
@@ -72,19 +69,11 @@ class SelectedBookView extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-<<<<<<< HEAD:lib/views/user_view/selected_book_view.dart
               const DescriptionBook(),
               const SizedBox(
                 height: 25,
               ),
               const AddCommentForRating(),
-=======
-              DescriptionBook(),
-              SizedBox(
-                height: 25,
-              ),
-              AddCommentForRating(),
->>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29:lib/views/selected_book_view.dart
             ],
           ),
         ),
