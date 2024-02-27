@@ -17,7 +17,7 @@ class DescriptionBook extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        Divider(
           height: 20,
         ),
         Text(

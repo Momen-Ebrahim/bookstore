@@ -33,8 +33,11 @@ class BookStore extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
+<<<<<<< HEAD
         // home: const AdminNavigationBar(),
         // home: const UserNavigationBar(),
+=======
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
       ),
     );
   }

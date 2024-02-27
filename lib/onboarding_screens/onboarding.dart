@@ -52,7 +52,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             child: Text(
                               'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
                               style: TextStyle(
+<<<<<<< HEAD
                                 fontSize: 16,
+=======
+                                fontSize: 18,
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black,
                                 fontFamily: 'Poppins',
@@ -84,10 +88,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               const Text(
                                 "You have account?",
                                 style: TextStyle(
+<<<<<<< HEAD
                                   color: Colors.black,
                                   fontWeight: FontWeight.normal,
                                   fontSize: 16,
                                 ),
+=======
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 16),
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
                               ),
                               TextButton(
                                   onPressed: () {
@@ -100,6 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   },
                                   child: const Text("Sign in",
                                       style: TextStyle(
+                                          fontSize: 16,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)))

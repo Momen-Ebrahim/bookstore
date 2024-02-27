@@ -65,6 +65,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+<<<<<<< HEAD
   convert:
     dependency: transitive
     description:
@@ -89,6 +90,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+=======
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
   curved_navigation_bar:
     dependency: "direct main"
     description:
@@ -97,6 +100,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+<<<<<<< HEAD
   device_info_plus:
     dependency: transitive
     description:
@@ -113,6 +117,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+=======
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
   expandable_page_view:
     dependency: "direct main"
     description:
@@ -254,6 +260,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -262,6 +269,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+=======
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -496,6 +505,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -504,6 +514,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+=======
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
   nested:
     dependency: transitive
     description:

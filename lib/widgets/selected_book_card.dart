@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import 'package:bookstore/models/book_card_models.dart';
 import 'package:bookstore/widgets/cart_when_pressinbook.dart';
+=======
+import 'package:bookstore/views/Cart.dart';
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +26,11 @@ class SelectedBookCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
+<<<<<<< HEAD
                   bookCardModels.image,
+=======
+                  'assets/images/topBooks1.png',
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
                   height: 217,
                   width: 138,
                 ),
@@ -59,9 +67,18 @@ class SelectedBookCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+<<<<<<< HEAD
               Text(
                 'Pricing :     ${bookCardModels.price}',
                 style: const TextStyle(
+=======
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                r'Pricing: $25.00',
+                style: TextStyle(
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),

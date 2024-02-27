@@ -1,6 +1,10 @@
 import 'package:bookstore/signin-up/sign_up_view.dart';
+<<<<<<< HEAD
 import 'package:bookstore/views/admin_view/Admin_nav_bar.dart';
 import 'package:bookstore/widgets/custom_input_decoration.dart';
+=======
+import 'package:bookstore/views/user_nav_bar_m.dart';
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +32,11 @@ class _SigninState extends State<Signin> {
       Navigator.push(
           context,
           MaterialPageRoute<void>(
+<<<<<<< HEAD
             builder: (BuildContext context) => const AdminNavigationBar(),
+=======
+            builder: (BuildContext context) => const UserNavigationBar(),
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
           ));
       //   Navigator.push(
       // context,
@@ -78,7 +86,11 @@ class _SigninState extends State<Signin> {
           print('user signed in');
         }
         Navigator.of(context).pushReplacement(
+<<<<<<< HEAD
             MaterialPageRoute(builder: (ctx) => const AdminNavigationBar()));
+=======
+            MaterialPageRoute(builder: (ctx) => const UserNavigationBar()));
+>>>>>>> 47f1769b8636468b250d00101c381a77bc1e1e29
       }
     } catch (e) {
       if (kDebugMode) {
