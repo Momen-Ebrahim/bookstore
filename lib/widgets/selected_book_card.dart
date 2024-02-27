@@ -1,9 +1,11 @@
-import 'package:bookstore/views/Cart.dart';
+import 'package:bookstore/models/book_card_models.dart';
+import 'package:bookstore/widgets/cart_when_pressinbook.dart';
+import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class SelectedBookCard extends StatelessWidget {
-  const SelectedBookCard({super.key});
-
+  const SelectedBookCard({super.key, required this.bookCardModels});
+  final BookCardModels bookCardModels;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,13 +17,21 @@ class SelectedBookCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/images/topBooks1.png',
-              height: 217,
-              width: 138,
-            ),
+          Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  bookCardModels.image,
+                  height: 217,
+                  width: 138,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const RatingBarWidget(),
+            ],
           ),
           const SizedBox(
             width: 20,
@@ -29,9 +39,9 @@ class SelectedBookCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Author : Oscar Wilde',
-                style: TextStyle(
+              Text(
+                'Author : ${bookCardModels.autherName}',
+                style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
@@ -39,9 +49,9 @@ class SelectedBookCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'Category : Classics',
-                style: TextStyle(
+              Text(
+                'Category : ${bookCardModels.category}',
+                style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
@@ -49,19 +59,9 @@ class SelectedBookCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                'Rating: 4.11/5',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                r'Pricing: $25.00',
-                style: TextStyle(
+              Text(
+                'Pricing :     ${bookCardModels.price}',
+                style: const TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 20,
                 ),
@@ -74,7 +74,7 @@ class SelectedBookCard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const Cart(),
+                        builder: (BuildContext context) => const Cartinbook(),
                       ));
                 },
                 child: Container(

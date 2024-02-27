@@ -34,7 +34,7 @@ class Page2 extends StatelessWidget {
               "Find the perfect book for and discover new ones that interest you",
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400),
             ),
           ),

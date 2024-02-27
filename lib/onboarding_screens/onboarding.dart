@@ -45,11 +45,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.only(left: 30, right: 30),
+                            padding: EdgeInsets.only(
+                              left: 30,
+                              right: 30,
+                            ),
                             child: Text(
                               'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black,
                                 fontFamily: 'Poppins',
@@ -63,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: CustomButton(
                               color: Colors.black,
-                              title: "sign up",
+                              title: "Sign Up",
                               onTap: () {
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(
@@ -79,10 +82,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text(
-                                "you have account?",
+                                "You have account?",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal),
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16,
+                                ),
                               ),
                               TextButton(
                                   onPressed: () {
@@ -93,10 +98,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     // //     await SharedPreferences.getInstance();
                                     // // pref.setBool('showhome', true);
                                   },
-                                  child: const Text("sign in",
+                                  child: const Text("Sign in",
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontWeight: FontWeight.bold)))
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16)))
                             ],
                           )
                         ]),
@@ -106,7 +112,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       GestureDetector(
                           child: const Text("skip",
-                              style: TextStyle(color: Colors.black)),
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18)),
                           onTap: () {
                             _pageController.jumpToPage(2);
                           }),
@@ -123,7 +130,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           )),
                       GestureDetector(
                         child: const Text("next",
-                            style: TextStyle(color: Colors.black)),
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 18)),
                         onTap: () {
                           _pageController.nextPage(
                               duration: const Duration(milliseconds: 300),

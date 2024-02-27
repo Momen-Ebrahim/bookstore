@@ -1,5 +1,6 @@
 import 'package:bookstore/signin-up/sign_up_view.dart';
-import 'package:bookstore/views/user_nav_bar.dart';
+import 'package:bookstore/views/admin_view/Admin_nav_bar.dart';
+import 'package:bookstore/widgets/custom_input_decoration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,13 @@ class _SigninState extends State<Signin> {
       Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => const UserNavBar(),
+            builder: (BuildContext context) => const AdminNavigationBar(),
           ));
+      //   Navigator.push(
+      // context,
+      // MaterialPageRoute<void>(
+      //   builder: (BuildContext context) => const UserNavBar(),
+      // ));
 
       if (kDebugMode) {
         print('user: $userCredential');
@@ -68,12 +74,16 @@ class _SigninState extends State<Signin> {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await auth.signInWithCredential(authCredential);
-        print('user signed in');
+        if (kDebugMode) {
+          print('user signed in');
+        }
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+            MaterialPageRoute(builder: (ctx) => const AdminNavigationBar()));
       }
     } catch (e) {
-      print('error: $e');
+      if (kDebugMode) {
+        print('error: $e');
+      }
     }
   }
 
@@ -81,8 +91,11 @@ class _SigninState extends State<Signin> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _handleSignIn();
-      print(_enterEmail);
-      print(_enteredPass);
+      if (kDebugMode) {
+        print(_enterEmail);
+         print(_enteredPass);
+      }
+     
       // final data = SignInModel(email: _enterEmail, password: _enteredPass);
       // signindata.add(data);
     }
@@ -118,49 +131,21 @@ class _SigninState extends State<Signin> {
             ),
             const SizedBox(height: 20),
             TextFormField(
-              validator: (value) {
-                if (!RegExp(
-                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                    .hasMatch(value!)) {
-                  return "Please enter a valid email address";
-                } else if (value.isEmpty) {
-                  return "Email should not be empty";
-                }
-                return null;
-              },
-              keyboardType: TextInputType.emailAddress,
-              onSaved: (value) {
-                _enterEmail = value!;
-              },
-              decoration: InputDecoration(
-                hintText: "Email",
-                prefixIcon: const Icon(Icons.email),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
+                validator: (value) {
+                  if (!RegExp(
+                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                      .hasMatch(value!)) {
+                    return "Please enter a valid email address";
+                  } else if (value.isEmpty) {
+                    return "Email should not be empty";
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.emailAddress,
+                onSaved: (value) {
+                  _enterEmail = value!;
+                },
+                decoration: inputdec('Email')),
             const SizedBox(height: 20),
             TextFormField(
               validator: (value) {
@@ -172,37 +157,17 @@ class _SigninState extends State<Signin> {
               onSaved: (value) {
                 _enteredPass = value!;
               },
-              decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: const Icon(Icons.lock),
+              decoration: inputdec('Password').copyWith(
                 suffixIcon: IconButton(
-                  onPressed: () => setState(() => _isVisible = !_isVisible),
-                  icon: _isVisible
-                      ? const Icon(Icons.visibility)
-                      : const Icon(Icons.visibility_off),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Color(0xff2F3C50),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(
-                    color: Colors.black,
+                  onPressed: () {
+                    setState(() {
+                      _isVisible = !_isVisible;
+                    });
+                  },
+                  icon: Icon(
+                    _isVisible
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                   ),
                 ),
               ),

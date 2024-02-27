@@ -1,8 +1,8 @@
 import 'package:bookstore/signin-up/sign_in.dart';
-import 'package:bookstore/views/user_nav_bar.dart';
+import 'package:bookstore/views/admin_view/admin_nav_bar.dart';
 import 'package:bookstore/widgets/custom_button.dart';
+import 'package:bookstore/widgets/custom_input_decoration.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,7 +30,7 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+          MaterialPageRoute(builder: (ctx) => const AdminNavigationBar()));
       if (kDebugMode) {
         print("User Created: ${userCredential.user!.uid}");
       }
@@ -53,12 +53,16 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await auth.signInWithCredential(authCredential);
-        print('user signed in');
+        if (kDebugMode) {
+          print('user signed in');
+        }
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (ctx) => const UserNavBar()));
+            MaterialPageRoute(builder: (ctx) => const AdminNavigationBar()));
       }
     } catch (e) {
-      print('error: $e');
+      if (kDebugMode) {
+        print('error: $e');
+      }
     }
   }
 
@@ -66,11 +70,13 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _handleSignUp();
-      print(firstName);
-      print(lastName);
-      print(nickName);
-      print(email);
-      print(password);
+      if (kDebugMode) {
+        print(firstName);
+        print(lastName);
+        print(nickName);
+        print(email);
+        print(password);
+      }
     }
   }
 
@@ -98,33 +104,7 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
                   onSaved: (value) {
                     firstName = value!;
                   },
-                  decoration: InputDecoration(
-                    hintText: 'First Name',
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Color(0xff2F3C50),
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Color(0xff2F3C50),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Color(0xff2F3C50),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                  decoration: inputdec('First Name'),
                 ),
               ),
               SizedBox(
@@ -141,33 +121,7 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
                     onSaved: (value) {
                       lastName = value!;
                     },
-                    decoration: InputDecoration(
-                      hintText: 'Last Name',
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Color(0xff2F3C50),
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Color(0xff2F3C50),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Color(0xff2F3C50),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                    decoration: inputdec('Last Name'),
                   )),
             ],
           ),
@@ -186,33 +140,7 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
             onSaved: (value) {
               nickName = value!;
             },
-            decoration: InputDecoration(
-              hintText: 'Nick Name',
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            decoration: inputdec('Nick Name'),
           ),
           const SizedBox(
             height: 20,
@@ -232,33 +160,7 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
             onSaved: (value) {
               email = value!;
             },
-            decoration: InputDecoration(
-              hintText: 'email',
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            decoration: inputdec('Email'),
           ),
           const SizedBox(
             height: 20,
@@ -283,45 +185,17 @@ class _FormSignUpAdminState extends State<FormSignUpAdmin> {
               password = value!;
             },
             obscureText: isObscure,
-            decoration: InputDecoration(
-              suffixIcon: isObscure
-                  ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isObscure = !isObscure;
-                        });
-                      },
-                      icon: const Icon(Icons.visibility_off))
-                  : IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isObscure = !isObscure;
-                        });
-                      },
-                      icon: const Icon(Icons.remove_red_eye)),
-              hintText: 'Password',
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color(0xff2F3C50),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.black,
+            decoration: inputdec('Password').copyWith(
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+                icon: Icon(
+                  isObscure
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                 ),
               ),
             ),

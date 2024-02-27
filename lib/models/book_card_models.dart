@@ -1,5 +1,11 @@
-// class BookCardModels {
-//   final String category, title, subTitle,autherName, price;
+class BookCardModels {
+  final String image, category, title, autherName, price;
 
-// const  BookCardModels( {required this.category, required this.title, required this.autherName, required this.price,required this.subTitle});
-// }
+  const BookCardModels(
+    this.image, {
+    required this.category,
+    required this.title,
+    required this.autherName,
+    required this.price,
+  });
+}

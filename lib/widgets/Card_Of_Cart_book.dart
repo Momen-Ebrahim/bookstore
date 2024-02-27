@@ -57,6 +57,7 @@ class CcardOfCartbookState extends State<CardOfCartbook> {
                       color: Colors.white,
                       fontSize: 10,
                       fontWeight: FontWeight.w300)),
+              SizedBox(height: height * (10 / 800)),
               Text(
                 widget.title,
                 style: const TextStyle(
@@ -64,48 +65,13 @@ class CcardOfCartbookState extends State<CardOfCartbook> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: height * (4 / 800)),
-              Text(widget.author,
+              SizedBox(height: height * (15 / 800)),
+              Text("By: ${widget.author}",
                   style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w300)),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400)),
               const Spacer(),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      if (_counter > 0) {
-                        setState(() {
-                          _counter--;
-                        });
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.remove,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    _counter.toString(),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _counter++;
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
         ),
