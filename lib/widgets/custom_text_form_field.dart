@@ -1,30 +1,31 @@
-import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.hintText,
-      this.onSaved,
-      this.validator,
-      this.obscureText = false,
-      this.autovalidateMode,
-      this.suffixIcon,
-      this.prefixIcon});
-  final String hintText;
-  final Icon? suffixIcon;
-  final Icon? prefixIcon;
+  const CustomTextFormField({
+    super.key,
+    this.validator,
+    this.onSaved,
+    required this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
+    required this.obscureText,
+    this.controller,
+  });
+  final String? Function(String?)? validator;
   final Function(String?)? onSaved;
-  final String Function(String?)? validator;
+  final String hintText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final TextEditingController? controller;
   final bool obscureText;
-  final AutovalidateMode? autovalidateMode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode: autovalidateMode,
-      obscureText: obscureText,
-      onSaved: onSaved,
+      controller: controller,
       validator: validator,
+      keyboardType: TextInputType.emailAddress,
+      onSaved: onSaved,
+      obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,
@@ -50,7 +51,7 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(
-            color: kPrimerycolor,
+            color: Colors.black,
           ),
         ),
       ),

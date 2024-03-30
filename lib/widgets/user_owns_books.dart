@@ -1,4 +1,5 @@
-import 'package:bookstore/widgets/Card_Of_Cart_user_books.dart';
+import 'package:bookstore/constants.dart';
+import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:bookstore/widgets/open_book.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +16,10 @@ class _UserBooksState extends State<UserBooks> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Your Books',
+          title: Text('Your Books',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 24,
+                  fontSize: getResponsiveFontSize(context, fontSize: 24),
                   fontWeight: FontWeight.w600)),
           centerTitle: true,
         ),

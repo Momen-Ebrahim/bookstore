@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
 class HeadersOfBooksSection extends StatelessWidget {
@@ -11,19 +12,19 @@ class HeadersOfBooksSection extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 28,
-                color: Color(0xFF121212),
+                fontSize: getResponsiveFontSize(context, fontSize: 28),
+                color: const Color(0xFF121212),
               ),
             ),
             const Spacer(),
-            const Text(
+            Text(
               'see more',
               style: TextStyle(
                 fontWeight: FontWeight.w400,
-                fontSize: 20,
-                color: Color(0xFF121212),
+                fontSize: getResponsiveFontSize(context, fontSize: 20),
+                color: const Color(0xFF121212),
               ),
             ),
           ],

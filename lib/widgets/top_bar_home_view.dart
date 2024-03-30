@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
 class TopBarHomeView extends StatelessWidget {
@@ -7,17 +8,17 @@ class TopBarHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         Text(
           'Happy Reading!',
           style: TextStyle(
-              color: Color(0xFF111111),
-              fontSize: 24,
+              color: const Color(0xFF111111),
+              fontSize: getResponsiveFontSize(context, fontSize: 24),
               fontWeight: FontWeight.w600),
         ),
-        Spacer(),
-        Icon(
+        const Spacer(),
+        const Icon(
           Icons.search,
           size: 36,
           color: Color(0xFF111111),

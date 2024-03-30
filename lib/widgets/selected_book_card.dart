@@ -1,5 +1,6 @@
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/models/book_card_models.dart';
-import 'package:bookstore/widgets/cart_when_pressinbook.dart';
+import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -34,16 +35,16 @@ class SelectedBookCard extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            width: 20,
+            width: 10,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Author : ${bookCardModels.autherName}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: getResponsiveFontSize(context, fontSize: 20),
                 ),
               ),
               const SizedBox(
@@ -51,9 +52,9 @@ class SelectedBookCard extends StatelessWidget {
               ),
               Text(
                 'Category : ${bookCardModels.category}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: getResponsiveFontSize(context, fontSize: 20),
                 ),
               ),
               const SizedBox(
@@ -61,9 +62,9 @@ class SelectedBookCard extends StatelessWidget {
               ),
               Text(
                 'Pricing :     ${bookCardModels.price}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: getResponsiveFontSize(context, fontSize: 20),
                 ),
               ),
               const SizedBox(
@@ -72,10 +73,11 @@ class SelectedBookCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const Cartinbook(),
-                      ));
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const Cart(),
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: ShapeDecoration(
@@ -86,15 +88,15 @@ class SelectedBookCard extends StatelessWidget {
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 45, vertical: 12),
-                  child: const Text(
+                  child: Text(
                     'Add to Cart',
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        color: Color(0xFFF2F2F2)),
+                        fontSize: getResponsiveFontSize(context, fontSize: 18),
+                        color: const Color(0xFFF2F2F2)),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],

@@ -1,7 +1,10 @@
+import 'package:bookstore/cache/cache_helper.dart';
+import 'package:bookstore/constants.dart';
+import 'package:bookstore/core/services/service_locator.dart';
 import 'package:bookstore/onboarding_screens/page1.dart';
 import 'package:bookstore/onboarding_screens/page2.dart';
 import 'package:bookstore/onboarding_screens/page3.dart';
-import 'package:bookstore/signin-up/sign_in.dart';
+import 'package:bookstore/signin-up/sign_in_view.dart';
 import 'package:bookstore/signin-up/sign_up_view.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -42,81 +45,84 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ? Padding(
                     padding: const EdgeInsets.all(15),
                     child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(
-                              left: 30,
-                              right: 30,
-                            ),
-                            child: Text(
-                              'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * (50 / 800),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: CustomButton(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Text(
+                            'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
+                            style: TextStyle(
+                              fontSize:
+                                  getResponsiveFontSize(context, fontSize: 16),
+                              fontWeight: FontWeight.normal,
                               color: Colors.black,
-                              title: "Sign Up",
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushReplacement(MaterialPageRoute(
-                                  builder: (ctx) => const SignUpView(),
-                                ));
-                                // final pref =
-                                //           await SharedPreferences.getInstance();
-                                //       pref.setBool('showhome', true);
-                              },
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "You have account?",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16,
+                        ),
+                        SizedBox(
+                          height: height * (50 / 800),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: CustomButton(
+                            color: Colors.black,
+                            title: "Get Started",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const Signin(),
                                 ),
+                              );
+                              // final pref =
+                              //           await SharedPreferences.getInstance();
+                              //       pref.setBool('showhome', true);
+                            },
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => const SignUp(),
                               ),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                            builder: (ctx) => const Signin()));
-                                    // // final pref =
-                                    // //     await SharedPreferences.getInstance();
-                                    // // pref.setBool('showhome', true);
-                                  },
-                                  child: const Text("Sign in",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16)))
-                            ],
-                          )
-                        ]),
+                            );
+                            // // final pref =
+                            // //     await SharedPreferences.getInstance();
+                            // // pref.setBool('showhome', true);
+                          },
+                          child: Text(
+                            "Register",
+                            style: TextStyle(
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 16),
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                          child: const Text("skip",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18)),
-                          onTap: () {
-                            _pageController.jumpToPage(2);
-                          }),
+                        child: Text(
+                          "skip",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 18),
+                          ),
+                        ),
+                        onTap: () {
+                          getIt<CacheHelper>().saveData(
+                              key: "isOnBoardingVisited", value: true);
+                          _pageController.jumpToPage(2);
+                        },
+                      ),
                       SmoothPageIndicator(
                           controller: _pageController,
                           count: 3,
@@ -129,10 +135,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             expansionFactor: 4,
                           )),
                       GestureDetector(
-                        child: const Text("next",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 18)),
+                        child: Text("next",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 18))),
                         onTap: () {
+                          getIt<CacheHelper>().saveData(
+                              key: "isOnBoardingVisited", value: true);
                           _pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeIn);

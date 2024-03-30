@@ -1,5 +1,6 @@
-import 'package:bookstore/views/user_view/selected_book_view.dart';
-import 'package:bookstore/widgets/Card_Of_Cart_user_books.dart';
+import 'package:bookstore/constants.dart';
+import 'package:bookstore/views/selected_book_view.dart';
+import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:flutter/material.dart';
 
 class UserFavouriteBooks extends StatefulWidget {
@@ -15,10 +16,10 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Favourite Books',
+          title: Text('Favourite Books',
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 24,
+                  fontSize: getResponsiveFontSize(context, fontSize: 24),
                   fontWeight: FontWeight.w600)),
           centerTitle: true,
         ),

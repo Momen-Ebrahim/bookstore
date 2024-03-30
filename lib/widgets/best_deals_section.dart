@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/widgets/best_deals_page_view.dart';
 import 'package:bookstore/widgets/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,12 @@ class _BestDealsSectionState extends State<BestDealsSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Best Deals',
           style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 32,
-            color: Color(0xFF111111),
+            fontSize: getResponsiveFontSize(context, fontSize: 32),
+            color: const Color(0xFF111111),
           ),
         ),
         const SizedBox(

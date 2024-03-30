@@ -33,7 +33,7 @@ class BookCardListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.37,
+      height: MediaQuery.of(context).size.height * 0.46,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: bookCardItems.length,

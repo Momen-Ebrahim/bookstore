@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -21,21 +22,24 @@ class Page2 extends StatelessWidget {
               ),
             ),
           ),
-          const Text(
+          Text(
             "Search & Purchase",
-            style: TextStyle(color: Colors.black, fontSize: 30),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: getResponsiveFontSize(context, fontSize: 30)),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * .05,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Text(
               "Find the perfect book for and discover new ones that interest you",
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400),
+                color: Colors.black,
+                fontSize: getResponsiveFontSize(context, fontSize: 18),
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ]),

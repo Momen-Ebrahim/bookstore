@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,10 @@ class AddCommentForRating extends StatelessWidget {
             const Divider(
               height: 20,
             ),
-            const Text(
+            Text(
               'Comments',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getResponsiveFontSize(context, fontSize: 20),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -26,15 +27,18 @@ class AddCommentForRating extends StatelessWidget {
             ),
             ListTile(
               leading: Image.asset('assets/images/accountpic.png'),
-              title: const Text(
+              title: Text(
                 'This book is very interesting. I recommend reading it',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(
+                  fontSize: getResponsiveFontSize(context, fontSize: 16),
+                ),
               ),
             ),
             const SizedBox(
               height: 30,
             ),
             const CustomTextFormField(
+              obscureText: false,
               hintText: 'Add Comment ...',
               suffixIcon: Icon(Icons.send),
             ),

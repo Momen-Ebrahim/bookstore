@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-AppBar topBar(final String title) {
+AppBar topBar(final String title, Widget? widget) {
   return AppBar(
+    leading: widget,
     automaticallyImplyLeading: false,
     centerTitle: true,
     title: Text(

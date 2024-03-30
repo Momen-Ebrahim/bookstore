@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -14,10 +15,10 @@ class CustomTextField extends StatelessWidget {
           size: 32,
         ),
         hintText: 'Search title/author/ISBN no',
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
             fontWeight: FontWeight.w400,
-            fontSize: 18,
-            color: Color(0xFF252525)),
+            fontSize: getResponsiveFontSize(context, fontSize: 18),
+            color: const Color(0xFF252525)),
         fillColor: const Color(0xFFDEDEDE),
         filled: true,
         border: buildBorder(),

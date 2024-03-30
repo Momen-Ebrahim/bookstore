@@ -1,7 +1,8 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
-class CardOfCartbook extends StatefulWidget {
-  const CardOfCartbook(
+class CardOfCartBook extends StatelessWidget {
+  const CardOfCartBook(
       {super.key,
       required this.image,
       required this.title,
@@ -15,95 +16,96 @@ class CardOfCartbook extends StatefulWidget {
   final String type;
 
   @override
-  State<CardOfCartbook> createState() => CcardOfCartbookState();
-}
-
-int _counter = 1;
-
-class CcardOfCartbookState extends State<CardOfCartbook> {
-  @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.all(0),
-      height: height * (155 / 812),
+      height: MediaQuery.of(context).size.height * (155 / 812),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.black,
       ),
-      child: Row(children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
-          child: Image.asset(
-            widget.image,
-            height: height * (155 / 812),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
+            child: Image.asset(
+              image,
+              height: MediaQuery.of(context).size.height * (155 / 812),
+            ),
           ),
-        ),
-        SizedBox(
-          width: width * (10 / 360),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: height * (15 / 800)),
-          width: width * (120 / 360),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(widget.type,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w300)),
-              SizedBox(height: height * (10 / 800)),
-              Text(
-                widget.title,
-                style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: height * (15 / 800)),
-              Text("By: ${widget.author}",
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400)),
-              const Spacer(),
-            ],
+          SizedBox(
+            width: MediaQuery.of(context).size.width * (10 / 360),
           ),
-        ),
-        const Spacer(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.white,
-                )),
-            const Spacer(),
-            Row(
+          Container(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * (15 / 800)),
+            width: MediaQuery.of(context).size.width * (120 / 360),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(widget.price,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                SizedBox(
-                  width: width * (10 / 360),
-                )
+                Text(
+                  type,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: getResponsiveFontSize(context, fontSize: 16),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                      fontSize: getResponsiveFontSize(context, fontSize: 16),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(author,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: getResponsiveFontSize(context, fontSize: 16),
+                    )),
+                const Spacer(),
               ],
             ),
-            SizedBox(
-              height: height * (10 / 800),
-            )
-          ],
-        ),
-      ]),
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  )),
+              const Spacer(),
+              Row(
+                children: [
+                  Text(price,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: getResponsiveFontSize(context, fontSize: 20),
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (10 / 360),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * (10 / 800),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,10 @@
+import 'package:bookstore/cache/cache_helper.dart';
+import 'package:bookstore/constants.dart';
+import 'package:bookstore/core/services/service_locator.dart';
 import 'package:bookstore/onboarding_screens/onboarding.dart';
+import 'package:bookstore/signin-up/sign_in_view.dart';
 import 'package:flutter/material.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -10,17 +15,29 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    bool isOnBoardingVisited =
+        getIt<CacheHelper>().getData(key: 'isOnBoardingVisited') ?? false;
+
     Future.delayed(
-      const Duration(
-        seconds: 2,
-      ),
-      () => Navigator.pushAndRemoveUntil(
+        const Duration(
+          seconds: 2,
+        ), () {
+      if (isOnBoardingVisited == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Signin(),
+          ),
+        );
+      } else {
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const OnboardingScreen(),
           ),
-          (route) => false),
-    );
+        );
+      }
+    });
     super.initState();
   }
 
@@ -36,10 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Image.asset('assets/images/logo.png',
                     width: 200, height: 200)),
             const SizedBox(height: 15),
-            const Text(
+            Text(
               'E-BookStore',
               style: TextStyle(
-                  fontSize: 40,
+                  fontSize: getResponsiveFontSize(context, fontSize: 40),
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontFamily: 'Poppins'),

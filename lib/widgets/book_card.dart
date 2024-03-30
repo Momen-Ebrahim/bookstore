@@ -1,5 +1,6 @@
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/models/book_card_models.dart';
-import 'package:bookstore/views/admin_view/selected_book_view.dart';
+import 'package:bookstore/views/selected_book_view.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -64,10 +65,10 @@ class BookCard extends StatelessWidget {
                   children: [
                     Text(
                       bookCardModels.category,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w300,
-                        fontSize: 14,
-                        color: Color(0xFFDEDEDE),
+                        fontSize: getResponsiveFontSize(context, fontSize: 14),
+                        color: const Color(0xFFDEDEDE),
                       ),
                     ),
                     const SizedBox(
@@ -75,9 +76,9 @@ class BookCard extends StatelessWidget {
                     ),
                     Text(
                       bookCardModels.title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: getResponsiveFontSize(context, fontSize: 15),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -100,10 +101,10 @@ class BookCard extends StatelessWidget {
                     // ),
                     Text(
                       bookCardModels.autherName,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w300,
-                        fontSize: 14,
-                        color: Color(0xFFFFFFFF),
+                        fontSize: getResponsiveFontSize(context, fontSize: 14),
+                        color: const Color(0xFFFFFFFF),
                       ),
                     ),
                     const SizedBox(
@@ -111,10 +112,10 @@ class BookCard extends StatelessWidget {
                     ),
                     Text(
                       bookCardModels.price,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                        color: Color(0xFFFFFFFF),
+                        fontSize: getResponsiveFontSize(context, fontSize: 24),
+                        color: const Color(0xFFFFFFFF),
                       ),
                     ),
                     const SizedBox(

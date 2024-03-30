@@ -1,19 +1,29 @@
+import 'package:bookstore/cache/cache_helper.dart';
+import 'package:bookstore/core/api/dio_consumer.dart';
+import 'package:bookstore/core/services/service_locator.dart';
+import 'package:bookstore/core/utils/api_key.dart';
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
+import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
 import 'package:bookstore/simple_bloc_observer.dart';
 import 'package:bookstore/splash_screen/splash_screen.dart';
+import 'package:bookstore/views/user_nav_bar_m.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
+  Stripe.publishableKey = ApiKeys.publishablekey;
+
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  setUpServiceLocator();
+  await getIt<CacheHelper>().init();
   Bloc.observer = SimpleBlocObserver();
 
-  runApp(const BookStore());
+  runApp(BlocProvider(
+    create: (context) => UserCubit(DioConsumer(dio: Dio())),
+    child: const BookStore(),
+  ));
 }
 
 class BookStore extends StatelessWidget {
@@ -32,9 +42,7 @@ class BookStore extends StatelessWidget {
           fontFamily: 'RobotoSlab',
         ),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
-        // home: const AdminNavigationBar(),
-        // home: const UserNavigationBar(),
+        home: const UserNavigationBar(),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -18,23 +19,23 @@ class CategoryCard extends StatelessWidget {
           end: Alignment.bottomCenter,
         ),
         image: const DecorationImage(
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
           opacity: 0.5,
           image: AssetImage(
             'assets/images/categoryCover.png',
           ),
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(6),
         ),
       ),
       child: Center(
         child: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 24,
-            color: Color(0xFFF2F2F2),
+            fontSize: getResponsiveFontSize(context, fontSize: 24),
+            color: const Color(0xFFF2F2F2),
           ),
         ),
       ),
