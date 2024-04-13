@@ -22,7 +22,7 @@ class BottomNavigationBarCubit extends Cubit<BottomNavigationBarState> {
     emit(BottomNavigationBarCart());
   }
 
-  settingsNavigation() {
-    emit(BottomNavigationBarSettings());
+ searcgNavigation() {
+    emit(BottomNavigationBarSearch());
   }
 }

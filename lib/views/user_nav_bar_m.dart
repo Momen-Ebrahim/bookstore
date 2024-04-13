@@ -4,6 +4,7 @@ import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/views/categories_view.dart';
 import 'package:bookstore/views/chat_view.dart';
 import 'package:bookstore/views/home_view.dart';
+import 'package:bookstore/views/search_screen.dart';
 import 'package:bookstore/views/settings_view.dart';
 import 'package:bookstore/widgets/user_favourite_book.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
@@ -90,6 +91,10 @@ class UserNavigationBar extends StatelessWidget {
             color: Colors.white,
           ),
           Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          Icon(
             Icons.category,
             color: Colors.white,
           ),
@@ -106,10 +111,12 @@ class UserNavigationBar extends StatelessWidget {
           if (index == 0) {
             context.read<BottomNavigationBarCubit>().homeNavigation();
           } else if (index == 1) {
-            context.read<BottomNavigationBarCubit>().categoryNavigation();
+            context.read<BottomNavigationBarCubit>().searcgNavigation();
           } else if (index == 2) {
-            context.read<BottomNavigationBarCubit>().chatNavigation();
+            context.read<BottomNavigationBarCubit>().categoryNavigation();
           } else if (index == 3) {
+            context.read<BottomNavigationBarCubit>().chatNavigation();
+          } else if (index == 4) {
             context.read<BottomNavigationBarCubit>().cartNavigation();
           }
         },
@@ -123,6 +130,8 @@ class UserNavigationBar extends StatelessWidget {
             return const CategoriesView();
           } else if (state is BottomNavigationBarChat) {
             return const ChatView();
+          } else if (state is BottomNavigationBarSearch) {
+            return const SearchScreen();
           } else {
             return const Cart();
           }

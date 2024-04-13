@@ -86,7 +86,8 @@ class UserCubit extends Cubit<UserState> {
           ApiKey.confirmPassword: confirmPassword.text,
           ApiKey.location:
               '{"name":"methalfa","address":"meet halfa","coordinates":[30.1572709,31.224779]}',
-          ApiKey.profilePic: await uploadProfilePic(profilePic!),
+          // ApiKey.profilePic: await uploadProfilePic(profilePic!),
+          ApiKey.profilePic: "myPic"
         },
       );
       final signUpModel = SignUpModel.fromJson(response);

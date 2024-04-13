@@ -3,7 +3,6 @@ import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
 import 'package:bookstore/signin-up/sign_in_view.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
-import 'package:bookstore/widgets/image_picker.dart';
 import 'package:bookstore/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +47,7 @@ class _SignUpState extends State<SignUp> {
               child: ListView(
                 children: [
                   topBar('Register', null),
-                  const PickImageWidget(),
+                  // const PickImageWidget(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),

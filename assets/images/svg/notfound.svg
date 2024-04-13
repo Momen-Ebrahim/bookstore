@@ -1,0 +1,26 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 100 125" version="1.1" x="0px" y="0px">
+    <g transform="translate(0,-952.36216)">
+        <path
+            d="m 34.287036,954.6209 a 31.569046,31.569046 0 0 0 -22.786593,9.24124 31.569046,31.569046 0 0 0 0,44.64586 31.569046,31.569046 0 0 0 44.645907,0 31.569046,31.569046 0 0 0 0,-44.64586 31.569046,31.569046 0 0 0 -21.859314,-9.24124 z m -0.06963,4.72822 a 26.839828,26.839828 0 0 1 18.586891,7.85822 26.839828,26.839828 0 0 1 0,37.95866 26.839828,26.839828 0 0 1 -37.95866,0 26.839828,26.839828 0 0 1 0,-37.95866 26.839828,26.839828 0 0 1 19.371769,-7.85822 z"
+            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.89999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" ry="3.5761809" y="748.87958"
+            x="-676.99756" height="39.461311" width="7.1523619"
+            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.89999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" ry="3.5761786" y="768.11713"
+            x="-681.56024" height="37.488243" width="16.27779"
+            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.89999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect transform="matrix(0.70710678,-0.70710678,-0.70710678,-0.70710678,0,0)" ry="2.3751137" y="-733.88702"
+            x="-675.79724" height="25.262577" width="4.7502275"
+            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+            style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            width="4.7502275" height="25.262577" x="718.88062" y="-686.05347" ry="2.3751137"
+            transform="matrix(0.70710678,0.70710678,0.70710678,-0.70710678,0,0)" />
+    </g><text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold"
+        font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"></text><text x="0" y="120"
+        fill="#000000" font-size="5px" font-weight="bold"
+        font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"></text>
+</svg>

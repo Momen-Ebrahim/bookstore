@@ -45,7 +45,7 @@ class PaymentSuccess extends StatelessWidget {
                               fontSize: 22, fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 80,
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,8 +133,9 @@ class PaymentSuccess extends StatelessWidget {
                   )),
             ),
           ),
+
           Positioned(
-            top: height * .02,
+            top: height * .04,
             left: width * 0,
             right: width * .0,
             child: const CircleAvatar(

@@ -13,4 +13,4 @@ final class BottomNavigationBarChat extends BottomNavigationBarState {}
 
 final class BottomNavigationBarCart extends BottomNavigationBarState {}
 
-final class BottomNavigationBarSettings extends BottomNavigationBarState {}
+final class BottomNavigationBarSearch extends BottomNavigationBarState {}
