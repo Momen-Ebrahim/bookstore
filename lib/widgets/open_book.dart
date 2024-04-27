@@ -41,7 +41,7 @@ class _OpenBookState extends State<OpenBook> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SfPdfViewer.asset(
+          child: SfPdfViewer.network(
             widget.image,
             controller: _pdfViewerController,
             key: _pdfViewerKey,

@@ -14,7 +14,7 @@ class CardOfUserBooks extends StatefulWidget {
   final String image;
   final String title;
   final String author;
-  final String price;
+  final price;
   final String type;
   final Function ontap;
   @override
@@ -44,7 +44,7 @@ class CardOfUserBooksState extends State<CardOfUserBooks> {
               topLeft: Radius.circular(12),
               bottomLeft: Radius.circular(12),
             ),
-            child: Image.asset(
+            child: Image.network(
               widget.image,
               height: height * (155 / 812),
             ),

@@ -1,11 +1,11 @@
 class BookCardModels {
-  final String image, category, title, autherName, price;
+  var image, category, title, autherName, price;
 
-  const BookCardModels(
-    this.image, {
+  BookCardModels({
     required this.category,
     required this.title,
     required this.autherName,
     required this.price,
+    required this.image,
   });
 }

@@ -8,22 +8,26 @@ class SelectedCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        topBar(
-          categoryName,
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios_new),
+        body: SingleChildScrollView(
+      child: Column(
+        children: [
+          topBar(
+            categoryName,
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios_new),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 40,
-        ),
-        const BookCardOfCategoryListView(),
-      ],
+          const SizedBox(
+            height: 40,
+          ),
+          BookCardOfCategoryListView(
+            categoryName: categoryName,
+          ),
+        ],
+      ),
     ));
   }
 }

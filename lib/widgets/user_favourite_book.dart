@@ -1,5 +1,4 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/views/selected_book_view.dart';
 import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:flutter/material.dart';
 
@@ -35,12 +34,12 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
                   author: 'Cristina Camerena, Lady Desatia',
                   price: '\$17.00',
                   ontap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const SelectedBookView(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute<void>(
+                    //       builder: (BuildContext context) =>
+                    //           const SelectedBookView(),
+                    //     ));
                   },
                 ),
                 const SizedBox(
@@ -53,12 +52,12 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
                   price: '\$25.00',
                   type: 'Novel',
                   ontap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) =>
-                              const SelectedBookView(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute<void>(
+                    //       builder: (BuildContext context) =>
+                    //           const SelectedBookView(),
+                    //     ));
                   },
                 ),
               ],

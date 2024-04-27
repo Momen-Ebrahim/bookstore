@@ -1,5 +1,7 @@
-import 'package:bookstore/widgets/card_of_cart_book.dart';
+import 'package:bookstore/cubits/get_books/search_books%20-%20Copy/get_books_cubit.dart';
+import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -10,85 +12,86 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<Map<String, String>> books = [
-    {
-      'image': 'assets/images/bestDeals.png',
-      'type': 'Adult Narrative',
-      'title': 'book1',
-      'author': 'Cristina Camerena, Lady Desatia',
-      'price': '\$17.00',
-    },
-    {
-      'image': 'assets/images/topBooks2.png',
-      'title': 'book2',
-      'author': 'Kate Racculia',
-      'price': '\$25.00',
-      'type': 'Novel',
-    },
-    {
-      'image': 'assets/images/bestDeals.png',
-      'type': 'Adult Narrative',
-      'title': 'book3',
-      'author': 'Cristina Camerena, Lady Desatia',
-      'price': '\$17.00',
-    },
-    {
-      'image': 'assets/images/topBooks2.png',
-      'title': 'book4',
-      'author': 'Kate Racculia',
-      'price': '\$25.00',
-      'type': 'Novel',
-    },
-    {
-      'image': 'assets/images/bestDeals.png',
-      'type': 'Adult Narrative',
-      'title': 'book5',
-      'author': 'Cristina Camerena, Lady Desatia',
-      'price': '\$17.00',
-    },
-    {
-      'image': 'assets/images/topBooks2.png',
-      'title': 'book6',
-      'author': 'Kate Racculia',
-      'price': '\$25.00',
-      'type': 'Novel',
-    },
-    {
-      'image': 'assets/images/bestDeals.png',
-      'type': 'Adult Narrative',
-      'title': 'book7',
-      'author': 'Cristina Camerena, Lady Desatia',
-      'price': '\$17.00',
-    },
-    {
-      'image': 'assets/images/topBooks2.png',
-      'title': 'book8',
-      'author': 'Kate Racculia',
-      'price': '\$25.00',
-      'type': 'Novel',
-    },
-  ];
-  List<Map<String, String>> foundBooks = [];
-  bool isfound = true;
+  bool isempty = true;
+  // List<Map<String, String>> books = [
+  //   {
+  //     'image': 'assets/images/bestDeals.png',
+  //     'type': 'Adult Narrative',
+  //     'title': 'book1',
+  //     'author': 'Cristina Camerena, Lady Desatia',
+  //     'price': '\$17.00',
+  //   },
+  //   {
+  //     'image': 'assets/images/topBooks2.png',
+  //     'title': 'book2',
+  //     'author': 'Kate Racculia',
+  //     'price': '\$25.00',
+  //     'type': 'Novel',
+  //   },
+  //   {
+  //     'image': 'assets/images/bestDeals.png',
+  //     'type': 'Adult Narrative',
+  //     'title': 'book3',
+  //     'author': 'Cristina Camerena, Lady Desatia',
+  //     'price': '\$17.00',
+  //   },
+  //   {
+  //     'image': 'assets/images/topBooks2.png',
+  //     'title': 'book4',
+  //     'author': 'Kate Racculia',
+  //     'price': '\$25.00',
+  //     'type': 'Novel',
+  //   },
+  //   {
+  //     'image': 'assets/images/bestDeals.png',
+  //     'type': 'Adult Narrative',
+  //     'title': 'book5',
+  //     'author': 'Cristina Camerena, Lady Desatia',
+  //     'price': '\$17.00',
+  //   },
+  //   {
+  //     'image': 'assets/images/topBooks2.png',
+  //     'title': 'book6',
+  //     'author': 'Kate Racculia',
+  //     'price': '\$25.00',
+  //     'type': 'Novel',
+  //   },
+  //   {
+  //     'image': 'assets/images/bestDeals.png',
+  //     'type': 'Adult Narrative',
+  //     'title': 'book7',
+  //     'author': 'Cristina Camerena, Lady Desatia',
+  //     'price': '\$17.00',
+  //   },
+  //   {
+  //     'image': 'assets/images/topBooks2.png',
+  //     'title': 'book8',
+  //     'author': 'Kate Racculia',
+  //     'price': '\$25.00',
+  //     'type': 'Novel',
+  //   },
+  // ];
+  // List<Map<String, String>> foundBooks = [];
+  // bool isfound = true;
 
-  void searchBook(String search) {
-    if (search.isEmpty) {
-      setState(() {
-        foundBooks = [];
-        isfound = true;
-      });
-    } else {
-      setState(() {
-        foundBooks = books
-            .where((element) =>
-                element['title']!.toLowerCase().contains(search.toLowerCase()))
-            .toList();
-        if (foundBooks.isEmpty) {
-          isfound = false;
-        }
-      });
-    }
-  }
+  // void searchBook(String search) {
+  //   if (search.isEmpty) {
+  //     setState(() {
+  //       foundBooks = [];
+  //       isfound = true;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       foundBooks = books
+  //           .where((element) =>
+  //               element['title']!.toLowerCase().contains(search.toLowerCase()))
+  //           .toList();
+  //       if (foundBooks.isEmpty) {
+  //         isfound = false;
+  //       }
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +106,17 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               TextFormField(
                 onChanged: (value) {
-                  searchBook(value);
+                  // searchBook(value);
+                  if (value.isNotEmpty) {
+                    setState(() {
+                      isempty = false;
+                    });
+                    context.read<GetsearchBooksCubit>().getsearchbooks(value);
+                  } else {
+                    setState(() {
+                      isempty = true;
+                    });
+                  }
                 },
                 decoration: InputDecoration(
                   hintText: 'Search',
@@ -135,71 +148,93 @@ class _SearchScreenState extends State<SearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              if (foundBooks.isEmpty && isfound)
-                Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .17,
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/svg/find-book-icon.svg',
-                      height: 200,
-                      width: 200,
-                      color: Colors.black,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Find your book',
-                      style: TextStyle(
+              !isempty
+                  ? BlocBuilder<GetsearchBooksCubit, GetSearchState>(
+                      builder: (context, state) {
+                      if (state is GetSearchBooksLoading) {
+                        return const Center(
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                          ),
+                        );
+                      } else if (state is GetSearchBooksSuccess) {
+                        if (state.books.isEmpty) {
+                          return Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * .17,
+                                ),
+                                SvgPicture.asset(
+                                  'assets/images/svg/notfound.svg',
+                                  height: 200,
+                                  width: 200,
+                                  color: Colors.black,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Text(
+                                  'No book found ',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.books.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SearchCardOfCartBook(
+                                    image: state.books[index].image!.url
+                                        .toString(),
+                                    title: state.books[index].title!,
+                                    author: state.books[index].author!,
+                                    price: state.books[index].price!.toString(),
+                                    type: state.books[index].category!,
+                                  ));
+                            },
+                          );
+                        }
+                      } else {
+                        return const Center(
+                          child: Text('Failed to load books: '),
+                        );
+                      }
+                    })
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .17,
+                        ),
+                        SvgPicture.asset(
+                          'assets/images/svg/find-book-icon.svg',
+                          height: 200,
+                          width: 200,
                           color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              if (foundBooks.isEmpty && !isfound)
-                Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .17,
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/svg/notfound.svg',
-                      height: 200,
-                      width: 200,
-                      color: Colors.black,
-                      
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'No book found ',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: foundBooks.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CardOfCartBook(
-                        image: foundBooks[index]['image']!,
-                        title: foundBooks[index]['title']!,
-                        author: foundBooks[index]['author']!,
-                        price: foundBooks[index]['price']!,
-                        type: foundBooks[index]['type']!,
-                      ),
-                    );
-                  }),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          'Find your book',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    )
             ],
           ),
         ),

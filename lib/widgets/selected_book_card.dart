@@ -1,12 +1,22 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/models/book_card_models.dart';
 import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class SelectedBookCard extends StatelessWidget {
-  const SelectedBookCard({super.key, required this.bookCardModels});
-  final BookCardModels bookCardModels;
+  const SelectedBookCard(
+      {super.key,
+      r,
+      required this.image,
+      required this.title,
+      this.price,
+      required this.category,
+      required this.autherName});
+  final String image;
+  final String title;
+  final price;
+  final String category;
+  final String autherName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,8 +32,8 @@ class SelectedBookCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  bookCardModels.image,
+                child: Image.network(
+                  image,
                   height: 217,
                   width: 138,
                 ),
@@ -41,7 +51,7 @@ class SelectedBookCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Author : ${bookCardModels.autherName}',
+                'Author : $autherName',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -51,7 +61,7 @@ class SelectedBookCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Category : ${bookCardModels.category}',
+                'Category : $category',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -61,7 +71,7 @@ class SelectedBookCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Pricing :     ${bookCardModels.price}',
+                'Pricing :     $price',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: getResponsiveFontSize(context, fontSize: 20),

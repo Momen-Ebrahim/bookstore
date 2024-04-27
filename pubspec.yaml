@@ -53,6 +53,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^24.2.7
   get_it: ^7.6.7
   jwt_decoder: ^2.0.1
+  http: ^1.2.1
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to

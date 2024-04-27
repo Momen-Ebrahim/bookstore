@@ -1,25 +1,26 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/models/book_card_models.dart';
-import 'package:bookstore/views/selected_book_view.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class BookCardOfSelectedCategory extends StatelessWidget {
-  const BookCardOfSelectedCategory({super.key, required this.bookCardModels});
+  const BookCardOfSelectedCategory({Key? key, required this.bookCardModels})
+      : super(key: key);
+
   final BookCardModels bookCardModels;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const SelectedBookView(),
-            settings: RouteSettings(
-              arguments: bookCardModels,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) => SelectedBookView(
+        //       bookCardModels: bookCardModels,
+        //     ),
+        //   ),
+        // );
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 24),
@@ -43,7 +44,6 @@ class BookCardOfSelectedCategory extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
-                        // topRight: Radius.circular(12),
                       ),
                     ),
                   ),
@@ -51,7 +51,7 @@ class BookCardOfSelectedCategory extends StatelessWidget {
               ),
               Positioned(
                 top: 10,
-                child: Image.asset(
+                child: Image.network(
                   bookCardModels.image,
                   width: 200,
                   height: 160,
@@ -89,20 +89,6 @@ class BookCardOfSelectedCategory extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      // RichText(
-                      //   text: const  TextSpan(
-                      //     style: TextStyle(color: Colors.white),
-                      //     children: [
-                      //       TextSpan(
-                      //         text: 'The Picture of Dorian\n Gray',
-                      //         style: TextStyle(
-                      //           fontWeight: FontWeight.w600,
-                      //           fontSize: 15,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Text(
                         bookCardModels.autherName,
                         style: TextStyle(

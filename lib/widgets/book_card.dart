@@ -1,22 +1,39 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/models/book_card_models.dart';
 import 'package:bookstore/views/selected_book_view.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
-  const BookCard({super.key, required this.bookCardModels});
-  final BookCardModels bookCardModels;
+  const BookCard({
+    super.key,
+    required this.image,
+    required this.title,
+    this.price,
+    required this.category,
+    required this.autherName,
+    required this.description,
+  });
+  final String image;
+  final String title;
+  final price;
+  final String category;
+  final String autherName;
+  final String description;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const SelectedBookView(),
-            settings: RouteSettings(
-              arguments: bookCardModels,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => SelectedBookView(
+              image: image,
+              title: title,
+              price: price,
+              category: category,
+              autherName: autherName,
+              description: description,
             ),
           ),
         );
@@ -49,8 +66,8 @@ class BookCard extends StatelessWidget {
             ),
             Positioned(
               top: 10,
-              child: Image.asset(
-                bookCardModels.image,
+              child: Image.network(
+                image,
                 width: 200,
                 height: 150,
               ),
@@ -64,7 +81,7 @@ class BookCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      bookCardModels.category,
+                      category,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: getResponsiveFontSize(context, fontSize: 14),
@@ -75,7 +92,7 @@ class BookCard extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      bookCardModels.title,
+                      title,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: getResponsiveFontSize(context, fontSize: 15),
@@ -100,7 +117,7 @@ class BookCard extends StatelessWidget {
                     //   ),
                     // ),
                     Text(
-                      bookCardModels.autherName,
+                      autherName,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: getResponsiveFontSize(context, fontSize: 14),
@@ -110,14 +127,17 @@ class BookCard extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      bookCardModels.price,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: getResponsiveFontSize(context, fontSize: 24),
-                        color: const Color(0xFFFFFFFF),
-                      ),
-                    ),
+                    price != null
+                        ? Text(
+                            '$price',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize:
+                                  getResponsiveFontSize(context, fontSize: 24),
+                              color: const Color(0xFFFFFFFF),
+                            ),
+                          )
+                        : Container(),
                     const SizedBox(
                       height: 5,
                     ),

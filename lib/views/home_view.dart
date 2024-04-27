@@ -1,6 +1,8 @@
 import 'package:bookstore/widgets/best_deals_section.dart';
 import 'package:bookstore/widgets/book_card_list_view.dart';
 import 'package:bookstore/widgets/headers_of_books_section.dart';
+import 'package:bookstore/widgets/lastedbooks.dart';
+import 'package:bookstore/widgets/uncomingbooks.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -29,9 +31,9 @@ class HomeView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SizedBox(
-              //   height: 56,
-              // ),
+              SizedBox(
+                height: 56,
+              ),
               BestDealsSection(),
               SizedBox(
                 height: 56,
@@ -42,12 +44,12 @@ class HomeView extends StatelessWidget {
                 height: 56,
               ),
               HeadersOfBooksSection(title: 'Latest Books'),
-              BookCardListView(),
+              BooknewarrivalCardListView(),
               SizedBox(
                 height: 56,
               ),
               HeadersOfBooksSection(title: 'Upcoming Books'),
-              BookCardListView()
+              BookuncomingCardListView()
             ],
           ),
         ),

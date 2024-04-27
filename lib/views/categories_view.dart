@@ -5,55 +5,23 @@ import 'package:flutter/material.dart';
 class CategoriesView extends StatelessWidget {
   const CategoriesView({super.key});
   static const categoryItems = [
-    'Non-fiction',
-    'Classics',
     'Fantasy',
-    'Young Adult',
+    'Non-fiction',
+    'History',
+    'Classics',
+    'Mystery',
     'Crime',
-    'Horror',
-    'Sci-fi',
-    'Drama',
+    'Mystery',
+    'Fiction',
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: topBar(
-      //     'Happy Reading!',
-      //     GestureDetector(
-      //       // onTap: () => Navigator.push(
-      //       //   context,
-      //       //   MaterialPageRoute<void>(
-      //       //     builder: (BuildContext context) => const SearchView(),
-      //       //   ),
-      //       // ),
-      //       // child: const Icon(
-      //       //   Icons.search,
-      //       //   size: 30,
-      //       // ),
-      //     )),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const SizedBox(
-            //   height: 24,
-            // ),
-
-            // const Row(
-            //   children: [
-            //     Expanded(
-            //       child: CustomTextField(),
-            //     ),
-            //     SizedBox(
-            //       width: 10,
-            //     ),
-            //     FilterIcon(),
-            //   ],
-            // ),
-            // const SizedBox(
-            //   height: 36,
-            // ),
             Text(
               'Categories',
               style: TextStyle(

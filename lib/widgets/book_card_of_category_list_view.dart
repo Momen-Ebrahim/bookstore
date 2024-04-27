@@ -1,48 +1,71 @@
-import 'package:bookstore/models/book_card_models.dart';
-import 'package:bookstore/widgets/book_card_of_category.dart';
+import 'package:bookstore/cubits/get_books/get_Category_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BookCardOfCategoryListView extends StatelessWidget {
-  const BookCardOfCategoryListView({super.key});
-  static const bookCardItems = [
-    BookCardModels('assets/images/topBooks1.png',
-        category: 'classics',
-        title: 'The Picture of Dorian\n Gray',
-        autherName: 'Oscar Wilde',
-        price: r'$25.00'),
-    BookCardModels('assets/images/topBooks2.png',
-        category: 'classics',
-        title: 'The Picture of Dorian\n Gray',
-        autherName: 'Oscar Wilde',
-        price: r'$25.00'),
-    BookCardModels('assets/images/bestDeals.png',
-        category: 'classics',
-        title: 'The Picture of Dorian\n Gray',
-        autherName: 'Oscar Wilde',
-        price: r'$25.00'),
-    BookCardModels('assets/images/bestDeals1.png',
-        category: 'classics',
-        title: 'The Picture of Dorian\n Gray',
-        autherName: 'Oscar Wilde',
-        price: r'$25.00'),
+class BookCardOfCategoryListView extends StatefulWidget {
+  const BookCardOfCategoryListView({super.key, required this.categoryName});
+  final String categoryName;
 
-    // '',
-    // ',
-    // // 'assets/images/bestDeals1.png'
-  ];
+  @override
+  State<BookCardOfCategoryListView> createState() =>
+      _BookCardOfCategoryListViewState();
+}
+
+class _BookCardOfCategoryListViewState
+    extends State<BookCardOfCategoryListView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetCategoryBooksCubit>().getCategorybooks(widget.categoryName);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: bookCardItems.length,
-        itemBuilder: ((context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: BookCardOfSelectedCategory(
-              bookCardModels: bookCardItems[index],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            BlocBuilder<GetCategoryBooksCubit, GetCategoryState>(
+              builder: (context, state) {
+                if (state is GetCategoryBooksLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
+                  );
+                } else if (state is GetCategoryBooksSuccess) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 1,
+                    child: ListView.builder(
+                      itemCount: state.books.books!.length,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              right: 12, left: 12, bottom: 12.0),
+                          child: SearchCardOfCartBook(
+                            image:
+                                state.books.books![index].image!.url.toString(),
+                            title: state.books.books![index].title!,
+                            price: state.books.books![index].price.toString(),
+                            author: state.books.books![index].author!,
+                            type: state.books.books![index].category!,
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('Error'),
+                  );
+                }
+              },
             ),
-          );
-        }),
+          ],
+        ),
       ),
     );
   }
