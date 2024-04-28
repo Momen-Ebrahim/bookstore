@@ -1,6 +1,6 @@
+import 'package:bookstore/widgets/all_books_view.dart';
 import 'package:bookstore/widgets/best_deals_section.dart';
-import 'package:bookstore/widgets/book_card_list_view.dart';
-import 'package:bookstore/widgets/headers_of_books_section.dart';
+import 'package:bookstore/widgets/TopBooks_Card_ListView.dart';
 import 'package:bookstore/widgets/lastedbooks.dart';
 import 'package:bookstore/widgets/uncomingbooks.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +38,18 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: 56,
               ),
-              HeadersOfBooksSection(title: 'Top Books'),
-              BookCardListView(),
+              TopBookCardListView(),
               SizedBox(
                 height: 56,
               ),
-              HeadersOfBooksSection(title: 'Latest Books'),
               BooknewarrivalCardListView(),
               SizedBox(
                 height: 56,
               ),
-              HeadersOfBooksSection(title: 'Upcoming Books'),
+              AllBooksView(),
+              SizedBox(
+                height: 56,
+              ),
               BookuncomingCardListView()
             ],
           ),

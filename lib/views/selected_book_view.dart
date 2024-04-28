@@ -1,23 +1,32 @@
-import 'package:bookstore/constants.dart';
-import 'package:bookstore/widgets/add_comment_for_rating.dart';
-import 'package:bookstore/widgets/description_book.dart';
+import 'package:bookstore/cubits/get_books/book_id/get_books_cubit.dart';
+import 'package:bookstore/widgets/SelectedBookCard2.dart';
 import 'package:bookstore/widgets/selected_book_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SelectedBookView extends StatelessWidget {
-  const SelectedBookView({super.key, required this.image, required this.title, this.price, required this.category, required this.autherName, required this.description});
-final String image;
+class SelectedBookView extends StatefulWidget {
+  const SelectedBookView({
+    super.key,
+    required this.bookid,
+    required this.title,
+  });
+  final String bookid;
   final String title;
-  final price;
-  final String category;
-  final String autherName;
-      final String description;
+
+  @override
+  State<SelectedBookView> createState() => _SelectedBookViewState();
+}
+
+class _SelectedBookViewState extends State<SelectedBookView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetBookidCubit>().getBookid(widget.bookid);
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,13 +38,13 @@ final String image;
             size: 32,
           ),
         ),
-        title: Text(
-          category,
-          style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: getResponsiveFontSize(context, fontSize: 24),
-              color: const Color(0xFF121212)),
-        ),
+        // title: Text(
+        //   widget.title,
+        //style: TextStyle(
+        //fontWeight: FontWeight.w600,
+        //fontSize: getResponsiveFontSize(context, fontSize: 24),
+        //color: const Color(0xFF121212)),
+        //),
         centerTitle: true,
         actions: [
           Padding(
@@ -58,33 +67,32 @@ final String image;
               const SizedBox(
                 height: 20,
               ),
-              Center(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: getResponsiveFontSize(context, fontSize: 24),
-                  ),
-                ),
+              BlocBuilder<GetBookidCubit, GeBooksidtate>(
+                builder: (context, state) {
+                  if (state is GeBookidLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
+                    );
+                  } else if (state is GetBookidSuccess) {
+                    return SelectedBookCard2(
+                      image: state.books.book!.image!.url.toString(),
+                      title: state.books.book!.title!,
+                      price: state.books.book!.price!.toString(),
+                      category: state.books.book!.category!,
+                      autherName: state.books.book!.author!,
+                      description: state.books.book!.description!,
+                      bookid: widget.bookid,
+                    );
+                  } else if (state is GetBookidFailure) {
+                    return const Center(
+                      child: Text('Error'),
+                    );
+                  }
+                  return const SizedBox();
+                },
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              SelectedBookCard(
-                image: image,
-                title: title,
-                price: price,
-                category: category,
-                autherName: autherName,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-               DescriptionBook(description: description),
-              const SizedBox(
-                height: 25,
-              ),
-              const AddCommentForRating(),
             ],
           ),
         ),

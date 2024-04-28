@@ -1,20 +1,21 @@
 import 'package:bloc/bloc.dart';
-import 'package:bookstore/core/repo/get_books_repo.dart';
-import 'package:bookstore/models/books.dart';
+import 'package:bookstore/core/repo/books_repo/get_books_repo.dart';
+import 'package:bookstore/models/book_model/Category_model.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 part 'get_books_state.dart';
 
-class GetBooksCubit extends Cubit<GetBooksState> {
-  GetBooksCubit() : super(GetBooksInitial());
-  GetBooksRepo booksRepo = GetBooksRepo();
-  getbooks( ) async {
+class GetallBooksCubit extends Cubit<GetbookState> {
+  GetallBooksCubit() : super(GetbooksInitial());
+  GetBooksRepoo booksRepo = GetBooksRepoo();
+  getbooks() async {
     emit(GetBooksLoading());
     try {
       await booksRepo.getBooks().then((books) {
         if (books != null) {
-          emit(GetBooksSuccess(books: books));
+          emit(GetbooksSuccess(books: books));
         } else {
           emit(GetBooksFailure('Failed to load books'));
         }

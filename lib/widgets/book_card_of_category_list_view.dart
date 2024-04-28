@@ -50,8 +50,9 @@ class _BookCardOfCategoryListViewState
                                 state.books.books![index].image!.url.toString(),
                             title: state.books.books![index].title!,
                             price: state.books.books![index].price.toString(),
-                            author: state.books.books![index].author!,
-                            type: state.books.books![index].category!,
+                            autherName: state.books.books![index].author!,
+                            category: state.books.books![index].category!,
+                             bookid: state.books.books![index].sId!,
                           ),
                         );
                       },

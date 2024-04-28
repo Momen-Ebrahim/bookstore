@@ -1,5 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/views/cart.dart';
+import 'package:bookstore/widgets/add_comment_for_rating.dart';
+import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +11,18 @@ class SelectedBookCard extends StatelessWidget {
       r,
       required this.image,
       required this.title,
-      this.price,
+      required this.price,
       required this.category,
-      required this.autherName});
+      required this.autherName,
+      required this.description,
+      required this.bookid});
   final String image;
   final String title;
-  final price;
+  final String price;
   final String category;
   final String autherName;
+  final String description;
+  final String bookid;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,89 +32,105 @@ class SelectedBookCard extends StatelessWidget {
           borderRadius: BorderRadiusDirectional.circular(12),
         ),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Column(
+          Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  image,
-                  height: 217,
-                  width: 138,
-                ),
+              Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      image,
+                      height: 217,
+                      width: 138,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const RatingBarWidget(size: 35),
+                ],
               ),
               const SizedBox(
-                height: 20,
+                width: 10,
               ),
-              const RatingBarWidget(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Author : $autherName',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: getResponsiveFontSize(context, fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Category : $category',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: getResponsiveFontSize(context, fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Pricing :     $price',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: getResponsiveFontSize(context, fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) => const Cart(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Colors.black,
+                        shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 45, vertical: 12),
+                      child: Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 18),
+                            color: const Color(0xFFF2F2F2)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
           const SizedBox(
-            width: 10,
+            height: 25,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Author : $autherName',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: getResponsiveFontSize(context, fontSize: 20),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Category : $category',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: getResponsiveFontSize(context, fontSize: 20),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Pricing :     $price',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: getResponsiveFontSize(context, fontSize: 20),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const Cart(),
-                    ),
-                  );
-                },
-                child: Container(
-                  decoration: ShapeDecoration(
-                    color: Colors.black,
-                    shape: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 45, vertical: 12),
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: getResponsiveFontSize(context, fontSize: 18),
-                        color: const Color(0xFFF2F2F2)),
-                  ),
-                ),
-              ),
-            ],
+          const SizedBox(
+            height: 25,
           ),
+          DescriptionBook(description: description),
+          const SizedBox(
+            height: 25,
+          ),
+          const AddCommentForRating(),
         ],
       ),
     );

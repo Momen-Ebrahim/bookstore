@@ -20,7 +20,7 @@ class HeadersOfBooksSection extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              'see more',
+              'See All',
               style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: getResponsiveFontSize(context, fontSize: 20),

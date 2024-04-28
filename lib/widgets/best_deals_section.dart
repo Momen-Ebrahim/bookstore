@@ -147,7 +147,7 @@ class _BestDealsSectionState extends State<BestDealsSection> {
                                                     fontSize:
                                                         getResponsiveFontSize(
                                                             context,
-                                                            fontSize: 30),
+                                                            fontSize: 25),
                                                     fontWeight: FontWeight.w600,
                                                     color: const Color(
                                                         0xFF999999), // Gray color for original price

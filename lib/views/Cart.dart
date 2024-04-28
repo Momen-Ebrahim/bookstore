@@ -7,11 +7,34 @@ import 'package:bookstore/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Cart extends StatelessWidget {
+class Cart extends StatefulWidget {
   const Cart({super.key});
 
   @override
+  State<Cart> createState() => _CartState();
+}
+
+class _CartState extends State<Cart> {
+  @override
   Widget build(BuildContext context) {
+    List books = [
+      {
+        'image': 'assets/images/topBooks2.png',
+        'title': 'Tuesday Mooney Talks to Ghosts',
+        'author': 'Kate Racculia',
+        'price': '\$25.00',
+        'type': 'Novel',
+        'key': '1'
+      },
+      {
+        'image': 'assets/images/bestDeals.png',
+        'title': 'Hello, Dream',
+        'author': 'Cristina Camerena, Lady Desatia',
+        'price': '\$17.00',
+        'type': 'Adult Narrative',
+        'key': '2'
+      }
+    ];
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -19,21 +42,38 @@ class Cart extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CardOfCartBook(
-                  image: 'assets/images/topBooks2.png',
-                  title: 'Tuesday Mooney Talks to Ghosts',
-                  author: 'Kate Racculia',
-                  price: '\$25.00',
-                  type: 'Novel'),
               const SizedBox(
                 height: 20,
               ),
-              const CardOfCartBook(
-                image: 'assets/images/bestDeals.png',
-                type: 'Adult Narrative',
-                title: 'Hello, Dream',
-                author: 'Cristina Camerena, Lady Desatia',
-                price: '\$17.00',
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.45,
+                child: ListView.builder(
+                  itemCount: books.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Visibility(
+                      visible: books[index]['dismissed'] != true,
+                      child: Dismissible(
+                        key: Key(books[index]['key']),
+                        onDismissed: (direction) {
+                          setState(() {
+                            books[index]['dismissed'] = true;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: CardOfCartBook(
+                            image: books[index]['image'],
+                            title: books[index]['title'],
+                            author: books[index]['author'],
+                            price: books[index]['price'],
+                            type: books[index]['type'],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
               const SizedBox(
                 height: 20,

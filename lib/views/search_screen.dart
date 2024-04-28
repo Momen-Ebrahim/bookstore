@@ -1,4 +1,4 @@
-import 'package:bookstore/cubits/get_books/search_books%20-%20Copy/get_books_cubit.dart';
+import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,85 +13,6 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   bool isempty = true;
-  // List<Map<String, String>> books = [
-  //   {
-  //     'image': 'assets/images/bestDeals.png',
-  //     'type': 'Adult Narrative',
-  //     'title': 'book1',
-  //     'author': 'Cristina Camerena, Lady Desatia',
-  //     'price': '\$17.00',
-  //   },
-  //   {
-  //     'image': 'assets/images/topBooks2.png',
-  //     'title': 'book2',
-  //     'author': 'Kate Racculia',
-  //     'price': '\$25.00',
-  //     'type': 'Novel',
-  //   },
-  //   {
-  //     'image': 'assets/images/bestDeals.png',
-  //     'type': 'Adult Narrative',
-  //     'title': 'book3',
-  //     'author': 'Cristina Camerena, Lady Desatia',
-  //     'price': '\$17.00',
-  //   },
-  //   {
-  //     'image': 'assets/images/topBooks2.png',
-  //     'title': 'book4',
-  //     'author': 'Kate Racculia',
-  //     'price': '\$25.00',
-  //     'type': 'Novel',
-  //   },
-  //   {
-  //     'image': 'assets/images/bestDeals.png',
-  //     'type': 'Adult Narrative',
-  //     'title': 'book5',
-  //     'author': 'Cristina Camerena, Lady Desatia',
-  //     'price': '\$17.00',
-  //   },
-  //   {
-  //     'image': 'assets/images/topBooks2.png',
-  //     'title': 'book6',
-  //     'author': 'Kate Racculia',
-  //     'price': '\$25.00',
-  //     'type': 'Novel',
-  //   },
-  //   {
-  //     'image': 'assets/images/bestDeals.png',
-  //     'type': 'Adult Narrative',
-  //     'title': 'book7',
-  //     'author': 'Cristina Camerena, Lady Desatia',
-  //     'price': '\$17.00',
-  //   },
-  //   {
-  //     'image': 'assets/images/topBooks2.png',
-  //     'title': 'book8',
-  //     'author': 'Kate Racculia',
-  //     'price': '\$25.00',
-  //     'type': 'Novel',
-  //   },
-  // ];
-  // List<Map<String, String>> foundBooks = [];
-  // bool isfound = true;
-
-  // void searchBook(String search) {
-  //   if (search.isEmpty) {
-  //     setState(() {
-  //       foundBooks = [];
-  //       isfound = true;
-  //     });
-  //   } else {
-  //     setState(() {
-  //       foundBooks = books
-  //           .where((element) =>
-  //               element['title']!.toLowerCase().contains(search.toLowerCase()))
-  //           .toList();
-  //       if (foundBooks.isEmpty) {
-  //         isfound = false;
-  //       }
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -199,9 +120,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                     image: state.books[index].image!.url
                                         .toString(),
                                     title: state.books[index].title!,
-                                    author: state.books[index].author!,
+                                    autherName: state.books[index].author!,
                                     price: state.books[index].price!.toString(),
-                                    type: state.books[index].category!,
+                                    category: state.books[index].category!,
+                                    bookid: state.books[index].sId!,
                                   ));
                             },
                           );

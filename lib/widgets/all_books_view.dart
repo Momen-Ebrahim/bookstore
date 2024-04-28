@@ -1,25 +1,23 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/cubits/get_books/get_newarrival_books/get_books_cubit.dart';
+import 'package:bookstore/cubits/get_books/get_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/book_card.dart';
-import 'package:bookstore/widgets/see_all/see_all_Lastest_Books.dart';
+import 'package:bookstore/widgets/see_all/see_all_book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BooknewarrivalCardListView extends StatefulWidget {
-  const BooknewarrivalCardListView({super.key});
+class AllBooksView extends StatefulWidget {
+  const AllBooksView({super.key});
 
   @override
-  State<BooknewarrivalCardListView> createState() =>
-      _BooknewarrivalCardListViewState();
+  State<AllBooksView> createState() => _AllBooksViewState();
 }
 
-class _BooknewarrivalCardListViewState
-    extends State<BooknewarrivalCardListView> {
+class _AllBooksViewState extends State<AllBooksView> {
   @override
   void initState() {
     super.initState();
 
-    context.read<GetnewarrivalBooksCubit>().getnewarrivalbooks();
+    context.read<GetallBooksCubit>().getbooks();
   }
 
   @override
@@ -29,7 +27,7 @@ class _BooknewarrivalCardListViewState
         Row(
           children: [
             Text(
-              'Lastest Books',
+              'All Books',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -41,14 +39,13 @@ class _BooknewarrivalCardListViewState
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const SeeAllLastestBooks()),
+                  MaterialPageRoute(builder: (context) => const SeeAllBooks()),
                 );
               },
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    'see more',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -68,37 +65,37 @@ class _BooknewarrivalCardListViewState
         const SizedBox(
           height: 35,
         ),
-        BlocBuilder<GetnewarrivalBooksCubit, GearrivalBooksState>(
+        BlocBuilder<GetallBooksCubit, GetbookState>(
           builder: (context, state) {
-            if (state is GetnewarrivalBooksLoading) {
+            if (state is GetBooksLoading) {
               return const Center(
                 child: CircularProgressIndicator(
                   color: Colors.black,
                 ),
               );
-            } else if (state is GetnewarrivalBooksSuccess) {
+            } else if (state is GetbooksSuccess) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.45,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: state.books.book!.length,
+                  itemCount: state.books.length,
                   itemBuilder: ((context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 16.0),
                       child: BookCard(
-                        image: state.books.book![index].image!.url.toString(),
-                        title: state.books.book![index].title!,
-                        price: state.books.book![index].price!,
-                        category: state.books.book![index].category!,
-                        autherName: state.books.book![index].author!,
-                        description: state.books.book![index].description!,
-                        bookid: state.books.book![index].sId!,
+                        image: state.books[index].image!.url.toString(),
+                        title: state.books[index].title!,
+                        price: state.books[index].price!,
+                        category: state.books[index].category!,
+                        autherName: state.books[index].author!,
+                        description: state.books[index].description!,
+                        bookid: state.books[index].sId!,
                       ),
                     );
                   }),
                 ),
               );
-            } else if (state is GetnewarrivalBooksFailure) {
+            } else if (state is GetBooksFailure) {
               return const Center(
                 child: Text('Failed to load books: '),
               );

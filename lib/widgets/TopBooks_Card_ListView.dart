@@ -1,25 +1,23 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/cubits/get_books/get_newarrival_books/get_books_cubit.dart';
+import 'package:bookstore/cubits/get_books/get_topseller%20-books/get_books_cubit.dart';
 import 'package:bookstore/widgets/book_card.dart';
-import 'package:bookstore/widgets/see_all/see_all_Lastest_Books.dart';
+import 'package:bookstore/widgets/see_all/see_all_top_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BooknewarrivalCardListView extends StatefulWidget {
-  const BooknewarrivalCardListView({super.key});
+class TopBookCardListView extends StatefulWidget {
+  const TopBookCardListView({super.key});
 
   @override
-  State<BooknewarrivalCardListView> createState() =>
-      _BooknewarrivalCardListViewState();
+  State<TopBookCardListView> createState() => _TopBookCardListViewState();
 }
 
-class _BooknewarrivalCardListViewState
-    extends State<BooknewarrivalCardListView> {
+class _TopBookCardListViewState extends State<TopBookCardListView> {
   @override
   void initState() {
     super.initState();
-
-    context.read<GetnewarrivalBooksCubit>().getnewarrivalbooks();
+    // fetchBooks();
+    context.read<GettopsellerBooksCubit>().gettopsellerbooks();
   }
 
   @override
@@ -29,7 +27,7 @@ class _BooknewarrivalCardListViewState
         Row(
           children: [
             Text(
-              'Lastest Books',
+              'Top Books',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -42,7 +40,8 @@ class _BooknewarrivalCardListViewState
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const SeeAllLastestBooks()),
+                    builder: (context) => const SeeAllTopBooks(),
+                  ),
                 );
               },
               child: Row(
@@ -68,15 +67,16 @@ class _BooknewarrivalCardListViewState
         const SizedBox(
           height: 35,
         ),
-        BlocBuilder<GetnewarrivalBooksCubit, GearrivalBooksState>(
+        BlocBuilder<GettopsellerBooksCubit, GettopsellerBooksstate>(
           builder: (context, state) {
-            if (state is GetnewarrivalBooksLoading) {
+            if (state is GettopsellerBooksLoading) {
               return const Center(
                 child: CircularProgressIndicator(
                   color: Colors.black,
                 ),
               );
-            } else if (state is GetnewarrivalBooksSuccess) {
+            } else if (state is GettopsellerBooksSuccess) {
+              
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.45,
                 child: ListView.builder(
@@ -98,7 +98,7 @@ class _BooknewarrivalCardListViewState
                   }),
                 ),
               );
-            } else if (state is GetnewarrivalBooksFailure) {
+            } else if (state is GettopsellerBooksFailure) {
               return const Center(
                 child: Text('Failed to load books: '),
               );

@@ -1,19 +1,19 @@
 part of 'get_books_cubit.dart';
 
 @immutable
-sealed class GetBooksState {}
+sealed class GetbookState {}
 
-final class GetBooksInitial extends GetBooksState {}
+final class GetbooksInitial extends GetbookState {}
 
-final class GetBooksLoading extends GetBooksState {}
+final class GetBooksLoading extends GetbookState {}
 
-final class GetBooksSuccess extends GetBooksState {
-  final List<Books> books;
+final class GetbooksSuccess extends GetbookState {
+   final List<Books> books;
 
-  GetBooksSuccess({required this.books});
+  GetbooksSuccess({required this.books});
 }
 
-final class GetBooksFailure extends GetBooksState {
+final class GetBooksFailure extends GetbookState {
   final String message;
 
   GetBooksFailure(this.message);
