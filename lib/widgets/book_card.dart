@@ -74,7 +74,7 @@ class BookCard extends StatelessWidget {
                     category,
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
-                      fontSize: getResponsiveFontSize(context, fontSize: 14),
+                      fontSize: getResponsiveFontSize(context, fontSize: 12),
                       color: Colors.white,
                     ),
                   ),
@@ -93,10 +93,10 @@ class BookCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    autherName,
+                    'By: $autherName',
                     style: TextStyle(
                       fontWeight: FontWeight.w300,
-                      fontSize: getResponsiveFontSize(context, fontSize: 14),
+                      fontSize: getResponsiveFontSize(context, fontSize: 12),
                       color: Colors.white,
                     ),
                   ),
@@ -124,7 +124,9 @@ class BookCard extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const RatingBarWidget(size: 20,),
+                  const RatingBarWidget(
+                    size: 20,
+                  ),
                 ],
               ),
             ),

@@ -76,7 +76,7 @@ class SearchCardOfCartBook extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                        fontSize: getResponsiveFontSize(context, fontSize: 16),
+                        fontSize: getResponsiveFontSize(context, fontSize: 13),
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
@@ -97,21 +97,17 @@ class SearchCardOfCartBook extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const Spacer(),
-                Row(
-                  children: [
-                    price != ''
-                        ? Text("\$$price",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  getResponsiveFontSize(context, fontSize: 20),
-                              fontWeight: FontWeight.bold,
-                            ))
-                        : const Text(""),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * (10 / 360),
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: price != ''
+                      ? Text("\$$price",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 20),
+                            fontWeight: FontWeight.bold,
+                          ))
+                      : const Text(""),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * (10 / 800),

@@ -35,7 +35,7 @@ class Book {
   bool? onsale;
   bool? upcoming;
   bool? newarrival;
-  int? averageRating;
+  double? averageRating;
   int? iV;
 
   Book({

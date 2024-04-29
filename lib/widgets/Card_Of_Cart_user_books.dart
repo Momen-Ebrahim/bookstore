@@ -72,7 +72,7 @@ class CardOfUserBooksState extends State<CardOfUserBooks> {
                 Text(
                   widget.title,
                   style: TextStyle(
-                      fontSize: getResponsiveFontSize(context, fontSize: 20),
+                      fontSize: getResponsiveFontSize(context, fontSize: 16),
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
