@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:bookstore/widgets/open_book.dart';
@@ -131,13 +132,9 @@ class _UserBooksState extends State<UserBooks> {
                 );
               }
             } else if (state is GetownBooksFailure) {
-              return const Center(
-                child: Text('Failed to load own books'),
-              );
+              return const BooksError();
             }
-            return const SizedBox(
-              child: Text('Failed to load own books'),
-            );
+            return const BooksError();
           }),
         ),
       ),

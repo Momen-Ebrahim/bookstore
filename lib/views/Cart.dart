@@ -10,6 +10,7 @@ import 'package:bookstore/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -232,12 +233,50 @@ class _CartState extends State<Cart> {
               );
             }
           } else if (state is GetmarkseBooksFailure) {
-            return const Center(
-              child: Text('Failed to load total: '),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  SvgPicture.asset(
+                    'assets/images/svg/carterror.svg',
+                    height: 300,
+                    width: 300,
+                  ),
+                  Text(
+                    'Failed to load Cart',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: getResponsiveFontSize(context, fontSize: 30),
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
             );
           }
-          return const SizedBox(
-            child: Text('Failed to load total'),
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
+                SvgPicture.asset(
+                  'assets/images/svg/carterror.svg',
+                  height: 300,
+                  width: 300,
+                ),
+                Text(
+                  'Failed to load Cart',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: getResponsiveFontSize(context, fontSize: 30),
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
           );
         }),
       ),

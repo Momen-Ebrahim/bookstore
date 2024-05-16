@@ -1,3 +1,4 @@
+import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
@@ -129,9 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           );
                         }
                       } else {
-                        return const Center(
-                          child: Text('Failed to load books: '),
-                        );
+                        return const BooksError();
                       }
                     })
                   : Column(

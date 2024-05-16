@@ -1,4 +1,5 @@
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_fav_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
@@ -104,13 +105,9 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
                 );
               }
             } else if (state is GetFavoriteBooksFailure) {
-              return const Center(
-                child: Text('Failed to load favourite books'),
-              );
+              return const BooksError();
             }
-            return const SizedBox(
-              child: Text('Failed to load favourite books'),
-            );
+            return const BooksError();
           }),
 
           // child: FutureBuilder<List<FavBooksModel>>(
