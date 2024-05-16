@@ -30,53 +30,42 @@ class _SeeAllUpcomingBooksState extends State<SeeAllUpcomingBooks> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            BlocBuilder<GetupcomingBooksCubit, GetupcomingBooksState>(
-              builder: (context, state) {
-                if (state is GetupcomingBooksLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.black,
+        padding: const EdgeInsets.only(top: 32, left: 12, right: 12),
+        child: BlocBuilder<GetupcomingBooksCubit, GetupcomingBooksState>(
+          builder: (context, state) {
+            if (state is GetupcomingBooksLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+              );
+            } else if (state is GetupcomingBooksSuccess) {
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: state.books.book!.length,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: SearchCardOfCartBook(
+                      image: state.books.book![index].image!.url.toString(),
+                      title: state.books.book![index].title!,
+                      price: '',
+                      category: state.books.book![index].category!,
+                      autherName: state.books.book![index].author!,
+                      bookid: state.books.book![index].sId!,
                     ),
                   );
-                } else if (state is GetupcomingBooksSuccess) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.45,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: state.books.book!.length,
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: SearchCardOfCartBook(
-                            image:
-                                state.books.book![index].image!.url.toString(),
-                            title: state.books.book![index].title!,
-                            price: '',
-                            category: state.books.book![index].category!,
-                            autherName: state.books.book![index].author!,
-                            bookid: state.books.book![index].sId!,
-                          ),
-                        );
-                      }),
-                    ),
-                  );
-                } else if (state is GetupcomingBooksFailure) {
-                  return const Center(
-                    child: Text('Failed to load books: '),
-                  );
-                }
-                return const SizedBox(
-                  child: Text('Failed to load books'),
-                );
-              },
-            ),
-          ],
+                }),
+              );
+            } else if (state is GetupcomingBooksFailure) {
+              return const Center(
+                child: Text('Failed to load books: '),
+              );
+            }
+            return const SizedBox(
+              child: Text('Failed to load books'),
+            );
+          },
         ),
       ),
     );

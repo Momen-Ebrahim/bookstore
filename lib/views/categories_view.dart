@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class CategoriesView extends StatelessWidget {
   const CategoriesView({super.key});
   static const categoryItems = [
-    'Fantasy',
+    'Fiction',
     'Non-fiction',
+    'Fantasy',
     'History',
     'Classics',
     'Mystery',
     'Crime',
-    'Mystery',
-    'Fiction',
+    'Horror',
   ];
   @override
   Widget build(BuildContext context) {

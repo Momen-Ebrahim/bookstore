@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class OpenBook extends StatefulWidget {
-  const OpenBook({super.key, required this.image});
-  final String image;
+  const OpenBook({super.key, required this.bookurl});
+  final String bookurl;
 
   @override
   State<OpenBook> createState() => _OpenBookState();
@@ -42,7 +42,7 @@ class _OpenBookState extends State<OpenBook> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SfPdfViewer.network(
-            widget.image,
+            widget.bookurl,
             controller: _pdfViewerController,
             key: _pdfViewerKey,
             pageSpacing: 10.0,

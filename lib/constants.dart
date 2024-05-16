@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 const Color kPrimerycolor = Color(0xff7B61FF);
-
 double getResponsiveFontSize(BuildContext context, {required double fontSize}) {
   double scaleFactor = getScaleFactor(context);
   double responsiveFontSize = fontSize * scaleFactor;

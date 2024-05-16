@@ -39,6 +39,7 @@ class Book {
   var iV;
   var averageRating;
   bool? newarrival;
+  var saleprice;
 
   Book(
       {this.image,
@@ -57,7 +58,8 @@ class Book {
       this.upcoming,
       this.iV,
       this.averageRating,
-      this.newarrival});
+      this.newarrival,
+      this.saleprice});
 
   Book.fromJson(Map<String, dynamic> json) {
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
@@ -77,6 +79,7 @@ class Book {
     iV = json['__v'];
     averageRating = json['averageRating'];
     newarrival = json['newarrival'];
+    saleprice = json['saleprice'];
   }
 
   Map<String, dynamic> toJson() {
@@ -102,6 +105,7 @@ class Book {
     data['__v'] = this.iV;
     data['averageRating'] = this.averageRating;
     data['newarrival'] = this.newarrival;
+    data['saleprice'] = this.saleprice;
     return data;
   }
 }

@@ -91,6 +91,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
+                        rating: 0,
                         price: '',
                       ),
                     );
@@ -109,17 +110,5 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
         ),
       ],
     );
-    // return Row(
-    //   children: bookCardImage
-    //       .map((e) => const Expanded(
-    //             child: Padding(
-    //               padding: EdgeInsets.only(left: 12),
-    //               child: BookCardd(
-    //                 image: 'assets/images/topBooks2.png',
-    //               ),
-    //             ),
-    //           ))
-    //       .toList(),
-    // );
   }
 }

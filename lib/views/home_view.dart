@@ -1,6 +1,6 @@
 import 'package:bookstore/widgets/all_books_view.dart';
 import 'package:bookstore/widgets/best_deals_section.dart';
-import 'package:bookstore/widgets/TopBooks_Card_ListView.dart';
+import 'package:bookstore/widgets/top_books_card_list_view.dart';
 import 'package:bookstore/widgets/lastedbooks.dart';
 import 'package:bookstore/widgets/uncomingbooks.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +11,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // appBar: topBar(
-      //     'Happy Reading!',
-      //     GestureDetector(
-      //       onTap: () => Navigator.push(
-      //         context,
-      //         MaterialPageRoute<void>(
-      //           builder: (BuildContext context) => const SearchView(),
-      //         ),
-      //       ),
-      //       child: const Icon(
-      //         Icons.search,
-      //         size: 30,
-      //       ),
-      //     )),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         child: SingleChildScrollView(
@@ -35,9 +21,6 @@ class HomeView extends StatelessWidget {
                 height: 56,
               ),
               BestDealsSection(),
-              SizedBox(
-                height: 56,
-              ),
               TopBookCardListView(),
               SizedBox(
                 height: 56,

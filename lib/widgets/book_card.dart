@@ -8,19 +8,21 @@ class BookCard extends StatelessWidget {
     super.key,
     required this.image,
     required this.title,
-    this.price,
+    required this.price,
     required this.category,
     required this.autherName,
     required this.description,
     required this.bookid,
+    required this.rating,
   });
   final String image;
   final String title;
-  final price;
+  final String price;
   final String category;
   final String autherName;
   final String description;
   final String bookid;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,8 @@ class BookCard extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const RatingBarWidget(
+                  RatingBarWidget(
+                    rating: rating,
                     size: 20,
                   ),
                 ],

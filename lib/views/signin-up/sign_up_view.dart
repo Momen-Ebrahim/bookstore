@@ -1,6 +1,5 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
-import 'package:bookstore/signin-up/sign_in_view.dart';
+import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:bookstore/widgets/top_bar.dart';
@@ -16,16 +15,15 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final formKey = GlobalKey<FormState>();
   bool _isVisible = true;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
+    return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(state.message),
+              content: Text(state.toString()),
             ),
           );
           Navigator.pop(context);
@@ -42,7 +40,7 @@ class _SignUpState extends State<SignUp> {
             body: Padding(
           padding: const EdgeInsets.all(15),
           child: Form(
-            key: formKey,
+            key: context.read<SignUpCubit>().signUpFormKey,
             child: Center(
               child: ListView(
                 children: [
@@ -59,8 +57,57 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller:
+                              context.read<SignUpCubit>().signUpFirstName,
+                          obscureText: false,
+                          hintText: 'First Name',
+                          prefixIcon: const Icon(FontAwesomeIcons.user),
+                          validator: (value) {
+                            if (!RegExp(
+                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(value!)) {
+                              return "Please enter your name";
+                            } else if (value.isEmpty) {
+                              return "First Name should not be empty";
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {},
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: CustomTextFormField(
+                          controller:
+                              context.read<SignUpCubit>().signUpLastName,
+                          obscureText: false,
+                          hintText: 'Last Name',
+                          prefixIcon: const Icon(FontAwesomeIcons.user),
+                          validator: (value) {
+                            if (!RegExp(
+                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                .hasMatch(value!)) {
+                              return "Please enter your name";
+                            } else if (value.isEmpty) {
+                              return "Last Name should not be empty";
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpName,
+                    controller: context.read<SignUpCubit>().signUpUserName,
                     obscureText: false,
                     hintText: 'Username',
                     prefixIcon: const Icon(FontAwesomeIcons.user),
@@ -78,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpEmail,
+                    controller: context.read<SignUpCubit>().signUpEmail,
                     obscureText: false,
                     hintText: 'Email',
                     prefixIcon: const Icon(Icons.email),
@@ -96,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpPassword,
+                    controller: context.read<SignUpCubit>().signUpPassword,
                     obscureText: _isVisible,
                     hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
@@ -115,35 +162,17 @@ class _SignUpState extends State<SignUp> {
                     onSaved: (value) {},
                   ),
                   const SizedBox(height: 20),
-                  CustomTextFormField(
-                    controller: context.read<UserCubit>().confirmPassword,
-                    obscureText: _isVisible,
-                    hintText: 'Confirm Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      onPressed: () => setState(() => _isVisible = !_isVisible),
-                      icon: _isVisible
-                          ? const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Password should not be empty";
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {},
-                  ),
-                  const SizedBox(height: 20),
                   state is SignUpLoading
                       ? const Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
                         )
                       : CustomButton(
                           color: Colors.black,
                           title: 'Register',
                           onTap: () {
-                            context.read<UserCubit>().signUp();
+                            context.read<SignUpCubit>().signUp();
                             // if (formKey.currentState!.validate()) {
 
                             // }
@@ -163,12 +192,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    const Signin(),
-                              ));
+                          Navigator.pop(context);
                         },
                         child: Text(
                           'SignIn',

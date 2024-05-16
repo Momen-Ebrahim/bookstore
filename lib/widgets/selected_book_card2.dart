@@ -1,9 +1,13 @@
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/helper/api.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/widgets/add_comment_for_rating.dart';
+import 'package:bookstore/widgets/comments_of_book.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SelectedBookCard2 extends StatelessWidget {
   const SelectedBookCard2(
@@ -15,7 +19,8 @@ class SelectedBookCard2 extends StatelessWidget {
       required this.category,
       required this.autherName,
       required this.description,
-      required this.bookid});
+      required this.bookid,
+      required this.rating});
 
   final String autherName;
   final String bookid;
@@ -24,6 +29,7 @@ class SelectedBookCard2 extends StatelessWidget {
   final String image;
   final String price;
   final String title;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +107,8 @@ class SelectedBookCard2 extends StatelessWidget {
                         SizedBox(
                           height: hight * 0.01,
                         ),
-                        const RatingBarWidget(
+                        RatingBarWidget(
+                          rating: rating,
                           size: 45,
                         ),
                         SizedBox(
@@ -147,7 +154,14 @@ class SelectedBookCard2 extends StatelessWidget {
                               child: CustomButton(
                                 color: Colors.black,
                                 title: 'Add to Cart',
-                                onTap: () {},
+                                onTap: () async {
+                                  final response = await Api().post(
+                                    token:
+                                        CacheNetwork.getCacheData(key: 'token'),
+                                    url:
+                                        'https://book-store-api-mu.vercel.app/User/Bookmarks/$bookid',
+                                  );
+                                },
                               ),
                             )
                           ],
@@ -164,6 +178,20 @@ class SelectedBookCard2 extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
+          const Divider(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(
+              'Comments',
+              style: TextStyle(
+                fontSize: getResponsiveFontSize(context, fontSize: 20),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const CommentsOfBook(),
           const AddCommentForRating(),
         ],
       ),

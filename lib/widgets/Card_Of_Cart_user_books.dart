@@ -56,7 +56,7 @@ class CardOfUserBooksState extends State<CardOfUserBooks> {
             padding: EdgeInsets.only(
               top: height * (15 / 800),
             ),
-            width: width * (200 / 360),
+            width: width * (180 / 360),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,

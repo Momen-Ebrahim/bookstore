@@ -1,14 +1,16 @@
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
-import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/views/categories_view.dart';
 import 'package:bookstore/views/chat_view.dart';
 import 'package:bookstore/views/home_view.dart';
 import 'package:bookstore/views/search_screen.dart';
 import 'package:bookstore/views/settings_view.dart';
+import 'package:bookstore/views/signin-up/sign_in_view.dart';
 import 'package:bookstore/widgets/user_favourite_book.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -64,7 +66,6 @@ class UserNavigationBar extends StatelessWidget {
               title: const Text('Settings'),
               leading: const Icon(Icons.settings, color: Colors.black),
               onTap: () {
-                context.read<UserCubit>().getUserProfile();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -76,7 +77,13 @@ class UserNavigationBar extends StatelessWidget {
             ListTile(
                 title: const Text('Log out'),
                 leading: const Icon(Icons.logout, color: Colors.black),
-                onTap: () {}),
+                onTap: () {
+                  CacheNetwork.deleteCacheItem(key: 'token');
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Signin()),
+                  );
+                }),
           ],
         ),
       ),
@@ -125,6 +132,9 @@ class UserNavigationBar extends StatelessWidget {
         builder: (context, state) {
           if (state is BottomNavigationBarInitial ||
               state is BottomNavigationBarHome) {
+            if (kDebugMode) {
+              print(' token : ${CacheNetwork.getCacheData(key: 'token')}');
+            }
             return const HomeView();
           } else if (state is BottomNavigationBarCategory) {
             return const CategoriesView();

@@ -30,11 +30,13 @@ class _CartinbookState extends State<Cartinbook> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CardOfCartBook(
-                    image: 'assets/images/topBooks2.png',
-                    title: 'Tuesday Mooney Talks to Ghosts',
-                    author: 'Kate Racculia',
-                    price: '\$25.00',
-                    type: 'Novel'),
+                  image: 'assets/images/topBooks2.png',
+                  title: 'Tuesday Mooney Talks to Ghosts',
+                  author: 'Kate Racculia',
+                  price: '\$25.00',
+                  type: 'Novel',
+                  bookid: '10',
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -44,6 +46,7 @@ class _CartinbookState extends State<Cartinbook> {
                   title: 'Hello, Dream',
                   author: 'Cristina Camerena, Lady Desatia',
                   price: '\$17.00',
+                  bookid: '10',
                 ),
                 const SizedBox(
                   height: 20,

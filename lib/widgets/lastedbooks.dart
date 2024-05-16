@@ -88,11 +88,12 @@ class _BooknewarrivalCardListViewState
                       child: BookCard(
                         image: state.books.book![index].image!.url.toString(),
                         title: state.books.book![index].title!,
-                        price: state.books.book![index].price!,
+                        price: state.books.book![index].price.toString(),
                         category: state.books.book![index].category!,
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
+                        rating: state.books.book![index].averageRating!.toDouble(),
                       ),
                     );
                   }),

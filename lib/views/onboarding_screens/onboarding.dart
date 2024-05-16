@@ -1,11 +1,11 @@
 import 'package:bookstore/cache/cache_helper.dart';
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/services/service_locator.dart';
-import 'package:bookstore/onboarding_screens/page1.dart';
-import 'package:bookstore/onboarding_screens/page2.dart';
-import 'package:bookstore/onboarding_screens/page3.dart';
-import 'package:bookstore/signin-up/sign_in_view.dart';
-import 'package:bookstore/signin-up/sign_up_view.dart';
+import 'package:bookstore/views/onboarding_screens/page1.dart';
+import 'package:bookstore/views/onboarding_screens/page2.dart';
+import 'package:bookstore/views/onboarding_screens/page3.dart';
+import 'package:bookstore/views/signin-up/sign_in_view.dart';
+import 'package:bookstore/views/signin-up/sign_up_view.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 

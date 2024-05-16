@@ -85,11 +85,12 @@ class _AllBooksViewState extends State<AllBooksView> {
                       child: BookCard(
                         image: state.books[index].image!.url.toString(),
                         title: state.books[index].title!,
-                        price: state.books[index].price!,
+                        price: state.books[index].price.toString(),
                         category: state.books[index].category!,
                         autherName: state.books[index].author!,
                         description: state.books[index].description!,
                         bookid: state.books[index].sId!,
+                        rating: state.books[index].averageRating!.toDouble(),
                       ),
                     );
                   }),

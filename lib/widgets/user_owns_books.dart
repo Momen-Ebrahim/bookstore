@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:bookstore/widgets/open_book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
 class UserBooks extends StatefulWidget {
@@ -31,7 +33,7 @@ class _UserBooksState extends State<UserBooks> {
   @override
   void initState() {
     super.initState();
-    fetchBooks();
+    context.read<GetownBooksCubit>().getownBooks();
   }
 
   @override
@@ -48,79 +50,95 @@ class _UserBooksState extends State<UserBooks> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: books.length,
-                    itemBuilder: ((context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: CardOfUserBooks(
-                              image: books[index]['image']['url'],
-                              title: books[index]['title'],
-                              price: books[index]['price'],
-                              author: books[index]['author'],
-                              type: books[index]['category'],
+          child: BlocBuilder<GetownBooksCubit, GetownBooksState>(
+              builder: (context, state) {
+            if (state is GetownBooksLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+              );
+            } else if (state is GetownBooksSuccess) {
+              if (state.books.books!.isEmpty) {
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      Image.asset(
+                        'assets/images/emptyownbooks.png',
+                        height: 300,
+                        width: 300,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Buy some books',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 30),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return BlocBuilder<GetownBooksCubit, GetownBooksState>(
+                  builder: (context, state) {
+                    if (state is GetownBooksLoading) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ));
+                    } else if (state is GetownBooksSuccess) {
+                      return ListView.builder(
+                        itemCount: state.books.books!.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                right: 12, left: 12, bottom: 12.0),
+                            child: CardOfUserBooks(
+                              image: state.books.books![index].image!.url
+                                  .toString(),
+                              title: state.books.books![index].title!,
+                              price: state.books.books![index].price.toString(),
                               ontap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
                                           OpenBook(
-                                        image: books[index]['pdf']['url'],
+                                        bookurl: state
+                                            .books.books![index].pdf!.url
+                                            .toString(),
                                       ),
                                     ));
-                              }),
-                        ),
+                              },
+                              author: state.books.books![index].author!,
+                              type: state.books.books![index].category!,
+                            ),
+                          );
+                        },
                       );
-                    }),
-                  ),
-                )
-                // CardOfUserBooks(
-                //   image: 'assets/images/bestDeals.png',
-                //   type: 'Adult Narrative',
-                //   title: 'Hello, Dream',
-                //   author: 'Cristina Camerena, Lady Desatia',
-                //   price: '\$17.00',
-                //   ontap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute<void>(
-                //           builder: (BuildContext context) => const OpenBook(
-                //             image:
-                //                 'https://res.cloudinary.com/ddtp8tqvv/image/upload/v1713387512/Books/pkcyi4gcuzderpfel70g.pdf',
-                //           ),
-                //         ));
-                //   },
-                // ),
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // CardOfUserBooks(
-                //   image: 'assets/images/topBooks2.png',
-                //   title: 'Tuesday Mooney Talks to Ghosts',
-                //   author: 'Kate Racculia',
-                //   price: '\$25.00',
-                //   type: 'Novel',
-                //   ontap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute<void>(
-                //           builder: (BuildContext context) => const OpenBook(
-                //             image: 'assets/books/book4.pdf',
-                //           ),
-                //         ));
-                //   },
-                // ),
-              ],
-            ),
-          ),
+                    } else {
+                      return const Center(child: Text('No Books found'));
+                    }
+                  },
+                );
+              }
+            } else if (state is GetownBooksFailure) {
+              return const Center(
+                child: Text('Failed to load own books'),
+              );
+            }
+            return const SizedBox(
+              child: Text('Failed to load own books'),
+            );
+          }),
         ),
       ),
     );

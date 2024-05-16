@@ -1,48 +1,48 @@
-import 'package:bookstore/constants.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
+import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class AddCommentForRating extends StatelessWidget {
-  const AddCommentForRating({super.key});
+  const AddCommentForRating({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Divider(
-              height: 20,
-            ),
-            Text(
-              'Comments',
-              style: TextStyle(
-                fontSize: getResponsiveFontSize(context, fontSize: 20),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            ListTile(
-              leading: Image.asset('assets/images/accountpic.png'),
-              title: Text(
-                'This book is very interesting. I recommend reading it',
-                style: TextStyle(
-                  fontSize: getResponsiveFontSize(context, fontSize: 16),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const CustomTextFormField(
-              obscureText: false,
-              hintText: 'Add Comment ...',
-              suffixIcon: Icon(Icons.send),
-            ),
-          ],
-        ));
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      child: CustomTextFormField(
+        obscureText: false,
+        hintText: 'Add Comment ...',
+        suffixIcon: IconButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Center(child: Text("Rate this Book ..")),
+                  content: const Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      RatingBarWidget(size: 40, rating: 0),
+                    ],
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "ok",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    )
+                  ],
+                );
+              },
+            );
+          },
+          icon: const Icon(Icons.send),
+        ),
+      ),
+    );
   }
 }

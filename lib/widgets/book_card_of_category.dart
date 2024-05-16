@@ -113,7 +113,10 @@ class BookCardOfSelectedCategory extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      const RatingBarWidget( size: 20,),
+                      RatingBarWidget(
+                        size: 20,
+                        rating: bookCardModels.rating,
+                      ),
                     ],
                   ),
                 ),

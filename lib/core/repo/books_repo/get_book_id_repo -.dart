@@ -17,7 +17,6 @@ class GetBookidRepo {
       if (response.statusCode == 200) {
         Bookid resonse = Bookid.fromJson(decodedResponse);
         print('sssssssssssssss ${resonse.book!.price}');
-       
 
         return resonse;
       } else {

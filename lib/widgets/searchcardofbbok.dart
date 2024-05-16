@@ -100,7 +100,7 @@ class SearchCardOfCartBook extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 6),
                   child: price != ''
-                      ? Text("\$$price",
+                      ? Text(r"$" "$price",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize:

@@ -76,7 +76,6 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
                 ),
               );
             } else if (state is GettopsellerBooksSuccess) {
-              
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.45,
                 child: ListView.builder(
@@ -88,11 +87,13 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
                       child: BookCard(
                         image: state.books.book![index].image!.url.toString(),
                         title: state.books.book![index].title!,
-                        price: state.books.book![index].price!,
+                        price: state.books.book![index].price.toString(),
                         category: state.books.book![index].category!,
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
+                        rating:
+                            state.books.book![index].averageRating.toDouble(),
                       ),
                     );
                   }),
