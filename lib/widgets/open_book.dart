@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class OpenBook extends StatefulWidget {
-  const OpenBook({super.key, required this.bookurl});
+  const OpenBook({super.key, required this.bookurl, required this.bookname});
   final String bookurl;
-
+  final String bookname;
   @override
   State<OpenBook> createState() => _OpenBookState();
 }
@@ -35,7 +35,11 @@ class _OpenBookState extends State<OpenBook> {
                   size: 30,
                 ))
           ],
-          title: const Text('Book Name', style: TextStyle(color: Colors.white)),
+          title: Text(widget.bookname,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600)),
           backgroundColor: Colors.black,
           centerTitle: true,
         ),

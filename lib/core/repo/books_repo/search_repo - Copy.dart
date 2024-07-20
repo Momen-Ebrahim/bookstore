@@ -6,10 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class GetSearchBooksRepo {
-  Future<List<Books>?> getCategoryBooks(String search) async {
+  Future<List<Books>?> getCategoryBooks(String search, String filter) async {
     try {
       final url = Uri.parse(
-          'https://book-store-api-mu.vercel.app/Books?search=$search');
+          'https://book-store-api-mu.vercel.app/Books?search=$search&sort=$filter');
       if (kDebugMode) {
         print(url);
       }

@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/views/signin-up/sign_up_view.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
 import 'package:bookstore/widgets/custom_button.dart';
@@ -17,6 +18,7 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   bool _isVisible = true;
+
   @override
   void initState() {
     super.initState();
@@ -32,12 +34,12 @@ class _SigninState extends State<Signin> {
           child: Center(
             child: ListView(
               children: [
-                topBar('Get Started', null),
+                topBar(S.of(context).GetStarted, null),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 Text(
-                  'Please fill your details to login.',
+                  S.of(context).Pleasefillyourdetails,
                   style: TextStyle(
                     fontSize: getResponsiveFontSize(context, fontSize: 18),
                   ),
@@ -48,7 +50,7 @@ class _SigninState extends State<Signin> {
                 CustomTextFormField(
                   controller: context.read<SignInCubit>().signInEmail,
                   obscureText: false,
-                  hintText: 'Email',
+                  hintText: S.of(context).Email,
                   prefixIcon: const Icon(Icons.email),
                   validator: (value) {
                     if (!RegExp(
@@ -66,7 +68,7 @@ class _SigninState extends State<Signin> {
                 CustomTextFormField(
                   controller: context.read<SignInCubit>().signInPassword,
                   obscureText: _isVisible,
-                  hintText: 'Password',
+                  hintText: S.of(context).Password,
                   prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     onPressed: () => setState(() => _isVisible = !_isVisible),
@@ -75,19 +77,20 @@ class _SigninState extends State<Signin> {
                         : const Icon(Icons.visibility_off),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Password should not be empty";
+                    } else if (!RegExp(r'^(?=.*[A-Za-z\d]).{8,}$')
+                        .hasMatch(value)) {
+                      return "Password must be at least 8 characters or numbers";
                     }
                     return null;
                   },
                   onSaved: (value) {},
                 ),
                 const SizedBox(height: 30),
-                const SizedBox(height: 30),
                 BlocConsumer<SignInCubit, SignInState>(
                   listener: (context, state) {
                     if (state is SignInSuccess) {
-                      // Navigate to the next screen when sign-in is successful
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute<void>(
@@ -95,28 +98,34 @@ class _SigninState extends State<Signin> {
                               const UserNavigationBar(),
                         ),
                       );
+                    } else if (state is SignInFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Invalid Email Or Password!"),
+                        ),
+                      );
                     }
                   },
                   builder: (context, state) {
-                    if (state is SignInInitial) {
-                      return CustomButton(
-                        color: Colors.black,
-                        title: 'Get Started',
-                        onTap: () {
-                          context.read<SignInCubit>().signIn();
-                        },
-                      );
-                    } else if (state is SignInLoading) {
+                    if (state is SignInLoading) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
                       );
                     } else {
-                      // Handle other states, like error states
                       return CustomButton(
                         color: Colors.black,
-                        title: 'Get Started',
+                        title: S.of(context).GetStarted,
                         onTap: () {
-                          context.read<SignInCubit>().signIn();
+                          if (context
+                                  .read<SignInCubit>()
+                                  .signInFormKey
+                                  .currentState
+                                  ?.validate() ==
+                              true) {
+                            context.read<SignInCubit>().signIn();
+                          }
                         },
                       );
                     }
@@ -129,7 +138,7 @@ class _SigninState extends State<Signin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'New member ?  ',
+                      S.of(context).Newmember,
                       style: TextStyle(
                         fontSize: getResponsiveFontSize(context, fontSize: 16),
                       ),
@@ -144,7 +153,7 @@ class _SigninState extends State<Signin> {
                         );
                       },
                       child: Text(
-                        'Register',
+                        S.of(context).Register,
                         style: TextStyle(
                             fontSize:
                                 getResponsiveFontSize(context, fontSize: 18),

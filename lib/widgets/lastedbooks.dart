@@ -1,6 +1,8 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_newarrival_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_Lastest_Books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +31,7 @@ class _BooknewarrivalCardListViewState
         Row(
           children: [
             Text(
-              'Lastest Books',
+              S.of(context).NewArrivals,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -48,7 +50,7 @@ class _BooknewarrivalCardListViewState
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -71,14 +73,10 @@ class _BooknewarrivalCardListViewState
         BlocBuilder<GetnewarrivalBooksCubit, GearrivalBooksState>(
           builder: (context, state) {
             if (state is GetnewarrivalBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GetnewarrivalBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,
@@ -88,12 +86,15 @@ class _BooknewarrivalCardListViewState
                       child: BookCard(
                         image: state.books.book![index].image!.url.toString(),
                         title: state.books.book![index].title!,
-                        price: state.books.book![index].price.toString(),
+                        price: state.books.book![index].onsale!
+                            ? state.books.book![index].saleprice!.toString()
+                            : state.books.book![index].price!.toString(),
                         category: state.books.book![index].category!,
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
-                        rating: state.books.book![index].averageRating!.toDouble(),
+                        rating:
+                            state.books.book![index].averageRating!.toDouble(),
                       ),
                     );
                   }),

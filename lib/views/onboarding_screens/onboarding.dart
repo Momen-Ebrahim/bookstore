@@ -1,6 +1,7 @@
 import 'package:bookstore/cache/cache_helper.dart';
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/services/service_locator.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/views/onboarding_screens/page1.dart';
 import 'package:bookstore/views/onboarding_screens/page2.dart';
 import 'package:bookstore/views/onboarding_screens/page3.dart';
@@ -50,7 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           child: Text(
-                            'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
+                            S.of(context).readmorethan,
                             style: TextStyle(
                               fontSize:
                                   getResponsiveFontSize(context, fontSize: 16),
@@ -66,7 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: CustomButton(
                             color: Colors.black,
-                            title: "Get Started",
+                            title: S.of(context).GetStarted,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -94,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // // pref.setBool('showhome', true);
                           },
                           child: Text(
-                            "Register",
+                            S.of(context).Register,
                             style: TextStyle(
                                 fontSize: getResponsiveFontSize(context,
                                     fontSize: 16),
@@ -110,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       GestureDetector(
                         child: Text(
-                          "skip",
+                          S.of(context).skip,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize:
@@ -135,7 +136,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             expansionFactor: 4,
                           )),
                       GestureDetector(
-                        child: Text("next",
+                        child: Text(S.of(context).Next,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: getResponsiveFontSize(context,

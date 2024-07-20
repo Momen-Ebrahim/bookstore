@@ -30,7 +30,8 @@ class BookCard extends StatelessWidget {
       height: MediaQuery.of(context).size.height * (100 / 812),
       width: MediaQuery.of(context).size.width * (180 / 430),
       decoration: ShapeDecoration(
-        color: const Color(0xFF121212),
+        color: const Color.fromARGB(179, 223, 223, 223),
+        // color: const Color(0xFF121212),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -75,9 +76,9 @@ class BookCard extends StatelessWidget {
                   Text(
                     category,
                     style: TextStyle(
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.bold,
                       fontSize: getResponsiveFontSize(context, fontSize: 12),
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(
@@ -85,8 +86,10 @@ class BookCard extends StatelessWidget {
                   ),
                   Text(
                     title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: getResponsiveFontSize(context, fontSize: 15),
                       fontWeight: FontWeight.w600,
                     ),
@@ -96,32 +99,38 @@ class BookCard extends StatelessWidget {
                   ),
                   Text(
                     'By: $autherName',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.bold,
                       fontSize: getResponsiveFontSize(context, fontSize: 12),
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  price != ''
-                      ? Text(
-                          '\$$price',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 24),
-                            color: Colors.white,
-                          ),
-                        )
-                      : Text(
-                          '',
-                          style: TextStyle(
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 24),
-                            color: Colors.white,
-                          ),
+                  price != 'Owned'
+                      ? price != ''
+                          ? Text(
+                              '\$$price',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 24),
+                                color: Colors.black,
+                              ),
+                            )
+                          : Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 24),
+                                color: Colors.black,
+                              ),
+                            )
+                      : const SizedBox(
+                          height: 20,
                         ),
                   const SizedBox(
                     height: 5,

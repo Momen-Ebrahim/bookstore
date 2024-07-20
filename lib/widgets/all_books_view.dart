@@ -1,6 +1,8 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,7 @@ class _AllBooksViewState extends State<AllBooksView> {
         Row(
           children: [
             Text(
-              'All Books',
+              S.of(context).AllBooks,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -45,7 +47,7 @@ class _AllBooksViewState extends State<AllBooksView> {
               child: Row(
                 children: [
                   Text(
-                    'see more',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -68,14 +70,10 @@ class _AllBooksViewState extends State<AllBooksView> {
         BlocBuilder<GetallBooksCubit, GetbookState>(
           builder: (context, state) {
             if (state is GetBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GetbooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.length,
@@ -85,7 +83,9 @@ class _AllBooksViewState extends State<AllBooksView> {
                       child: BookCard(
                         image: state.books[index].image!.url.toString(),
                         title: state.books[index].title!,
-                        price: state.books[index].price.toString(),
+                        price: state.books[index].onsale!
+                            ? state.books[index].saleprice!.toString()
+                            : state.books[index].price!.toString(),
                         category: state.books[index].category!,
                         autherName: state.books[index].author!,
                         description: state.books[index].description!,

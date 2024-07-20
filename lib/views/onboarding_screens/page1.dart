@@ -1,4 +1,5 @@
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -24,7 +25,7 @@ class Page1 extends StatelessWidget {
               ),
             ),
             Text(
-              "Reading Offline",
+              S.of(context).ReadingOffline,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: getResponsiveFontSize(context, fontSize: 30)),
@@ -35,7 +36,7 @@ class Page1 extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Text(
-                "Reading books at anytime anywhere, save your time and data!",
+                S.of(context).Readingbooksatanytime,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: getResponsiveFontSize(context, fontSize: 18),

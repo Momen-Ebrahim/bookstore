@@ -1,6 +1,8 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_upcoming_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_upcoming_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +30,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
         Row(
           children: [
             Text(
-              'Upcoming Books',
+              S.of(context).ComingSoon,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -47,7 +49,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -70,14 +72,10 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
         BlocBuilder<GetupcomingBooksCubit, GetupcomingBooksState>(
           builder: (context, state) {
             if (state is GetupcomingBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GetupcomingBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.41,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,

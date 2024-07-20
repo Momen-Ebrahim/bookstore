@@ -10,10 +10,10 @@ part 'get_books_state.dart';
 class GetsearchBooksCubit extends Cubit<GetSearchState> {
   GetsearchBooksCubit() : super(GetSearchInitial());
   GetSearchBooksRepo booksRepo = GetSearchBooksRepo();
-  getsearchbooks(String search) async {
+  getsearchbooks(String search , String fliter) async {
     emit(GetSearchBooksLoading());
     try {
-      await booksRepo.getCategoryBooks(search).then((books) {
+      await booksRepo.getCategoryBooks(search , fliter).then((books) {
         if (books != null) {
           emit(GetSearchBooksSuccess(books: books));
         } else {

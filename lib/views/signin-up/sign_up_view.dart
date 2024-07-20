@@ -1,5 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
+import 'package:bookstore/views/signin-up/sign_in_view.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:bookstore/widgets/top_bar.dart';
@@ -44,13 +46,13 @@ class _SignUpState extends State<SignUp> {
             child: Center(
               child: ListView(
                 children: [
-                  topBar('Register', null),
+                  topBar(S.of(context).Register, null),
                   // const PickImageWidget(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Text(
-                    'Please fill your details to signup.',
+                    S.of(context).Pleasefillyourdetailstosignup,
                     style: TextStyle(
                         fontSize: getResponsiveFontSize(context, fontSize: 18)),
                   ),
@@ -64,15 +66,14 @@ class _SignUpState extends State<SignUp> {
                           controller:
                               context.read<SignUpCubit>().signUpFirstName,
                           obscureText: false,
-                          hintText: 'First Name',
+                          hintText: S.of(context).FirstName,
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
-                            if (!RegExp(
-                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                .hasMatch(value!)) {
-                              return "Please enter your name";
-                            } else if (value.isEmpty) {
-                              return "First Name should not be empty";
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your first name';
+                            }
+                            if (!RegExp(r"^[a-zA-Z]{2,30}$").hasMatch(value)) {
+                              return 'First name must be between 2 and 30 characters and contain only letters';
                             }
                             return null;
                           },
@@ -87,15 +88,14 @@ class _SignUpState extends State<SignUp> {
                           controller:
                               context.read<SignUpCubit>().signUpLastName,
                           obscureText: false,
-                          hintText: 'Last Name',
+                          hintText: S.of(context).LastName,
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
-                            if (!RegExp(
-                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                .hasMatch(value!)) {
-                              return "Please enter your name";
-                            } else if (value.isEmpty) {
-                              return "Last Name should not be empty";
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your last name';
+                            }
+                            if (!RegExp(r"^[a-zA-Z]{2,30}$").hasMatch(value)) {
+                              return 'Last name must be between 2 and 30 characters and contain only letters';
                             }
                             return null;
                           },
@@ -109,15 +109,14 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpUserName,
                     obscureText: false,
-                    hintText: 'Username',
+                    hintText: S.of(context).UserName,
                     prefixIcon: const Icon(FontAwesomeIcons.user),
                     validator: (value) {
-                      if (!RegExp(
-                              r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                          .hasMatch(value!)) {
-                        return "Please enter your name";
-                      } else if (value.isEmpty) {
-                        return "Username should not be empty";
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
+                      }
+                      if (!RegExp(r"^[a-zA-Z0-9_]{3,15}$").hasMatch(value)) {
+                        return 'Username must be between 3 and 15 characters and contain only letters, numbers, and underscores';
                       }
                       return null;
                     },
@@ -127,7 +126,7 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpEmail,
                     obscureText: false,
-                    hintText: 'Email',
+                    hintText: S.of(context).Email,
                     prefixIcon: const Icon(Icons.email),
                     validator: (value) {
                       if (!RegExp(
@@ -145,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpPassword,
                     obscureText: _isVisible,
-                    hintText: 'Password',
+                    hintText: S.of(context).Password,
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       onPressed: () => setState(() => _isVisible = !_isVisible),
@@ -154,8 +153,11 @@ class _SignUpState extends State<SignUp> {
                           : const Icon(Icons.visibility_off),
                     ),
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return "Password should not be empty";
+                      } else if (!RegExp(r'^(?=.*[A-Za-z\d]).{8,}$')
+                          .hasMatch(value)) {
+                        return "Password must be at least 8 characters or numbers";
                       }
                       return null;
                     },
@@ -170,12 +172,16 @@ class _SignUpState extends State<SignUp> {
                         )
                       : CustomButton(
                           color: Colors.black,
-                          title: 'Register',
+                          title: S.of(context).Register,
                           onTap: () {
-                            context.read<SignUpCubit>().signUp();
-                            // if (formKey.currentState!.validate()) {
-
-                            // }
+                            if (context
+                                    .read<SignUpCubit>()
+                                    .signUpFormKey
+                                    .currentState!
+                                    .validate() ==
+                                true) {
+                              context.read<SignUpCubit>().signUp();
+                            }
                           },
                         ),
                   const SizedBox(
@@ -185,14 +191,19 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already a member ? ',
+                        S.of(context).Alreadyhaveanaccount,
                         style: TextStyle(
                             fontSize:
                                 getResponsiveFontSize(context, fontSize: 16)),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => const Signin(),
+                            ),
+                          );
                         },
                         child: Text(
                           'SignIn',

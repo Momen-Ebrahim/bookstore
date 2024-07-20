@@ -33,6 +33,7 @@ class Bookmarks {
   String? description;
   String? category;
   var price;
+  var saleprice;
   bool? topseller;
   bool? onsale;
   bool? upcoming;
@@ -52,6 +53,7 @@ class Bookmarks {
       this.description,
       this.category,
       this.price,
+      this.saleprice,
       this.topseller,
       this.onsale,
       this.upcoming,
@@ -71,6 +73,7 @@ class Bookmarks {
     description = json['description'];
     category = json['category'];
     price = json['price'];
+    saleprice = json['saleprice'];
     topseller = json['topseller'];
     onsale = json['onsale'];
     upcoming = json['upcoming'];
@@ -96,6 +99,7 @@ class Bookmarks {
     data['description'] = this.description;
     data['category'] = this.category;
     data['price'] = this.price;
+    data['saleprice'] = this.saleprice;
     data['topseller'] = this.topseller;
     data['onsale'] = this.onsale;
     data['upcoming'] = this.upcoming;

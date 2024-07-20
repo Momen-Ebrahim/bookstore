@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CardOfUserBooks extends StatefulWidget {
   CardOfUserBooks({
@@ -26,6 +27,12 @@ class CardOfUserBooksState extends State<CardOfUserBooks> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    return Intl.getCurrentLocale() != 'ar'
+        ? engowncart(height, width, context)
+        : arabicwoncart(height, width, context);
+  }
+
+  InkWell engowncart(double height, double width, BuildContext context) {
     return InkWell(
       onTap: () {
         widget.ontap();
@@ -91,6 +98,83 @@ class CardOfUserBooksState extends State<CardOfUserBooks> {
             ),
           ),
         ]),
+      ),
+    );
+  }
+
+  InkWell arabicwoncart(double height, double width, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        widget.ontap();
+      },
+      child: Container(
+        padding: const EdgeInsets.all(0),
+        height: height * (155 / 812),
+        width: width * (330 / 360),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.black,
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(12),
+                bottomRight: Radius.circular(12),
+              ),
+              child: Image.network(
+                widget.image,
+                height: height * (155 / 812),
+              ),
+            ),
+            SizedBox(
+              width: width * (10 / 360),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: height * (15 / 800),
+              ),
+              width: width * (180 / 360),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.type,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: getResponsiveFontSize(context, fontSize: 12),
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * (10 / 800),
+                  ),
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: getResponsiveFontSize(context, fontSize: 16),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * (10 / 800),
+                  ),
+                  Text(
+                    "By: ${widget.author}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: getResponsiveFontSize(context, fontSize: 15),
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

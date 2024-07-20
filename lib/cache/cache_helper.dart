@@ -13,7 +13,6 @@ class CacheHelper {
   }
 
 //! this method to put data in local database using key
-
   Future<bool> saveData({required String key, required dynamic value}) async {
     if (value is bool) {
       return await sharedPreferences.setBool(key, value);
@@ -31,13 +30,11 @@ class CacheHelper {
   }
 
 //! this method to get data already saved in local database
-
   dynamic getData({required String key}) {
     return sharedPreferences.get(key);
   }
 
 //! remove data using specific key
-
   Future<bool> removeData({required String key}) async {
     return await sharedPreferences.remove(key);
   }
@@ -63,5 +60,15 @@ class CacheHelper {
     } else {
       return await sharedPreferences.setInt(key, value);
     }
+  }
+
+  //! Save Locale
+  Future<bool> saveLocale(String locale) async {
+    return await sharedPreferences.setString('locale', locale);
+  }
+
+  //! Get Locale
+  String? getLocale() {
+    return sharedPreferences.getString('locale');
   }
 }

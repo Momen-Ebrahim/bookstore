@@ -54,7 +54,10 @@ dependencies:
   get_it: ^7.6.7
   jwt_decoder: ^2.0.1
   http: ^1.2.1
+  shimmer: ^3.0.0
   flutter_launcher_icons: ^0.13.1
+  flutter_localizations:
+    sdk: flutter
 
 flutter_launcher_icons:
   android: true

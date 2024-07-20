@@ -1,3 +1,4 @@
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
@@ -50,17 +51,17 @@ class PaymentSuccess extends StatelessWidget {
                         SizedBox(
                           height: height * .07,
                         ),
-                        const Text(
-                          'Payment Successful',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).PaymentSuccessful,
+                          style: const TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                          'Thank you for your purchase',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).Thankyouforyourpurchase,
+                          style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(
@@ -69,9 +70,9 @@ class PaymentSuccess extends StatelessWidget {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Date:',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).Date,
+                                style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w400),
                               ),
                               Text(
@@ -86,9 +87,9 @@ class PaymentSuccess extends StatelessWidget {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Time:',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).Time,
+                                style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w400),
                               ),
                               Text(
@@ -105,9 +106,9 @@ class PaymentSuccess extends StatelessWidget {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Total:',
-                                style: TextStyle(
+                              Text(
+                                S.of(context).Totall,
+                                style: const TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               Text(
@@ -136,10 +137,10 @@ class PaymentSuccess extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'PAID',
-                                  style: TextStyle(
+                                  S.of(context).PAID,
+                                  style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold),
                                 ),

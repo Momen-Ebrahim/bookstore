@@ -6,9 +6,11 @@ class CategoryGridView extends StatelessWidget {
   const CategoryGridView({
     super.key,
     required this.categoryItems,
+    required this.getLocalizedCategoryItems,
   });
 
   final List<String> categoryItems;
+  final List<String> getLocalizedCategoryItems;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,14 @@ class CategoryGridView extends StatelessWidget {
                   MaterialPageRoute<void>(
                     builder: (BuildContext context) => SelectedCategory(
                       categoryName: categoryItems[index],
+                      getLocalizedCategoryItems:
+                      getLocalizedCategoryItems[index],
                     ),
                   ),
                 );
               },
               child: CategoryCard(
-                title: categoryItems[index],
+                title: getLocalizedCategoryItems[index],
               ),
             ),
           );

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:bookstore/core/utils/api_key.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/amount_model/amount_model.dart';
@@ -137,9 +138,9 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
                   }
                   if (state is StripePaymentFailure) {
                     Navigator.of(context).pop();
-                    SnackBar snackBar = const SnackBar(
-                      content: Text('Payment Failed'),
-                      duration: Duration(seconds: 1),
+                    SnackBar snackBar = SnackBar(
+                      content: Text(S.of(context).PaymentFailed),
+                      duration: const Duration(seconds: 1),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
@@ -149,7 +150,7 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: CustomButton(
                       color: Colors.black,
-                      title: 'Pay',
+                      title: S.of(context).pay,
                       isSeloading: state is StripePaymentLoading ? true : false,
                       onTap: () {
                         if (selectedPayment == 0) {

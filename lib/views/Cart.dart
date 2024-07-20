@@ -2,6 +2,7 @@ import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/repo/checkout_repo_impl.dart';
 import 'package:bookstore/cubits/get_books/get_user_Bookmarks_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/payment_details.dart';
@@ -54,7 +55,7 @@ class _CartState extends State<Cart> {
                       height: 20,
                     ),
                     Text(
-                      'Your cart is empty',
+                      S.of(context).Yourcartisempty,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize:
@@ -110,8 +111,12 @@ class _CartState extends State<Cart> {
                                     title: state.books.bookmarks![index].title!,
                                     author:
                                         state.books.bookmarks![index].author!,
-                                    price: state.books.bookmarks![index].price!
-                                        .toString(),
+                                    price: state.books.bookmarks![index].onsale!
+                                        ? state
+                                            .books.bookmarks![index].saleprice!
+                                            .toString()
+                                        : state.books.bookmarks![index].price!
+                                            .toString(),
                                     type:
                                         state.books.bookmarks![index].category!,
                                     bookid: state.books.bookmarks![index].sId!,
@@ -133,7 +138,7 @@ class _CartState extends State<Cart> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text('Order Summary',
+                    Text(S.of(context).OrderSummary,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize:
@@ -164,12 +169,14 @@ class _CartState extends State<Cart> {
                             itemCount: state.books.bookmarks!.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
-                              total += state.books.bookmarks![index].price!;
+                              total += state.books.bookmarks![index].onsale!
+                                  ? state.books.bookmarks![index].saleprice!
+                                  : state.books.bookmarks![index].price!;
                               return index == state.books.bookmarks!.length - 1
                                   ? Row(
                                       children: [
                                         Text(
-                                          'Total',
+                                          S.of(context).Total,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: getResponsiveFontSize(
@@ -208,7 +215,7 @@ class _CartState extends State<Cart> {
                     ),
                     CustomButton(
                       color: Colors.black,
-                      title: 'Proceed to Checkout',
+                      title: S.of(context).ProceedtoCheckout,
                       onTap: () {
                         showModalBottomSheet(
                             context: context,

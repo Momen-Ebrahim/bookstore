@@ -1,5 +1,7 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +26,9 @@ class _SeeAllBooksState extends State<SeeAllBooks> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'All Books',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          S.of(context).AllBooks,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),
@@ -35,11 +37,7 @@ class _SeeAllBooksState extends State<SeeAllBooks> {
         child: BlocBuilder<GetallBooksCubit, GetbookState>(
           builder: (context, state) {
             if (state is GetBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingBigCard();
             } else if (state is GetbooksSuccess) {
               return ListView.builder(
                 shrinkWrap: true,
@@ -49,9 +47,12 @@ class _SeeAllBooksState extends State<SeeAllBooks> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: SearchCardOfCartBook(
+                      rate: state.books[index].averageRating!.toDouble(),
                       image: state.books[index].image!.url.toString(),
                       title: state.books[index].title!,
-                      price: state.books[index].price!.toString(),
+                      price: state.books[index].onsale!
+                          ? state.books[index].saleprice!.toString()
+                          : state.books[index].price!.toString(),
                       category: state.books[index].category!,
                       autherName: state.books[index].author!,
                       bookid: state.books[index].sId!,

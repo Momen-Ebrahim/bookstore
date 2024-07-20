@@ -21,19 +21,19 @@ class HomeView extends StatelessWidget {
                 height: 56,
               ),
               BestDealsSection(),
-              TopBookCardListView(),
-              SizedBox(
-                height: 56,
-              ),
               BooknewarrivalCardListView(),
               SizedBox(
                 height: 56,
               ),
-              AllBooksView(),
+              BookuncomingCardListView(),
               SizedBox(
                 height: 56,
               ),
-              BookuncomingCardListView()
+              TopBookCardListView(),
+              SizedBox(
+                height: 56,
+              ),
+              AllBooksView(),
             ],
           ),
         ),

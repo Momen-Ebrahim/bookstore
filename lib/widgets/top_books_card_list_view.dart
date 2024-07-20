@@ -1,6 +1,8 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_topseller%20-books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_top_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         Row(
           children: [
             Text(
-              'Top Books',
+              S.of(context).BestSeller,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -47,7 +49,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -70,14 +72,10 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         BlocBuilder<GettopsellerBooksCubit, GettopsellerBooksstate>(
           builder: (context, state) {
             if (state is GettopsellerBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GettopsellerBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,
@@ -87,7 +85,9 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
                       child: BookCard(
                         image: state.books.book![index].image!.url.toString(),
                         title: state.books.book![index].title!,
-                        price: state.books.book![index].price.toString(),
+                        price: state.books.book![index].onsale!
+                            ? state.books.book![index].saleprice!.toString()
+                            : state.books.book![index].price!.toString(),
                         category: state.books.book![index].category!,
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
@@ -111,17 +111,5 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         ),
       ],
     );
-    // return Row(
-    //   children: bookCardImage
-    //       .map((e) => const Expanded(
-    //             child: Padding(
-    //               padding: EdgeInsets.only(left: 12),
-    //               child: BookCardd(
-    //                 image: 'assets/images/topBooks2.png',
-    //               ),
-    //             ),
-    //           ))
-    //       .toList(),
-    // );
   }
 }

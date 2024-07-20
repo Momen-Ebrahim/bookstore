@@ -39,7 +39,7 @@ class Books {
   var iV;
   var averageRating;
   bool? newarrival;
-
+  var saleprice;
   Books(
       {this.image,
       this.pdf,
@@ -52,6 +52,7 @@ class Books {
       this.description,
       this.category,
       this.price,
+      this.saleprice,
       this.topseller,
       this.onsale,
       this.upcoming,
@@ -71,6 +72,7 @@ class Books {
     description = json['description'];
     category = json['category'];
     price = json['price'];
+    saleprice = json['saleprice'];
     topseller = json['topseller'];
     onsale = json['onsale'];
     upcoming = json['upcoming'];
@@ -96,6 +98,7 @@ class Books {
     data['description'] = this.description;
     data['category'] = this.category;
     data['price'] = this.price;
+    data['saleprice'] = this.saleprice;
     data['topseller'] = this.topseller;
     data['onsale'] = this.onsale;
     data['upcoming'] = this.upcoming;
