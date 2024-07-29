@@ -87,7 +87,6 @@ class _BookStoreState extends State<BookStore> {
         locale: _locale,
         localizationsDelegates: const [
           S.delegate,
-          GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
