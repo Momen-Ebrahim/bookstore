@@ -81,57 +81,7 @@ class _BookStoreState extends State<BookStore> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BottomNavigationBarCubit>(
-          create: (BuildContext context) => BottomNavigationBarCubit(),
-        ),
-        BlocProvider<GetallBooksCubit>(
-          create: (BuildContext context) => GetallBooksCubit(),
-        ),
-        BlocProvider<GetonsaleBooksCubit>(
-          create: (BuildContext context) => GetonsaleBooksCubit(),
-        ),
-        BlocProvider<GettopsellerBooksCubit>(
-          create: (BuildContext context) => GettopsellerBooksCubit(),
-        ),
-        BlocProvider<GetnewarrivalBooksCubit>(
-          create: (BuildContext context) => GetnewarrivalBooksCubit(),
-        ),
-        BlocProvider<GetupcomingBooksCubit>(
-          create: (BuildContext context) => GetupcomingBooksCubit(),
-        ),
-        BlocProvider<GetCategoryBooksCubit>(
-          create: (BuildContext context) => GetCategoryBooksCubit(),
-        ),
-        BlocProvider<GetsearchBooksCubit>(
-          create: (BuildContext context) => GetsearchBooksCubit(),
-        ),
-        BlocProvider<GetBookidCubit>(
-          create: (BuildContext context) => GetBookidCubit(),
-        ),
-        BlocProvider<GetFavoritesBooksCubit>(
-          create: (BuildContext context) => GetFavoritesBooksCubit(),
-        ),
-        BlocProvider<GetownBooksCubit>(
-          create: (BuildContext context) => GetownBooksCubit(),
-        ),
-        BlocProvider<GetmarksBooksCubit>(
-          create: (BuildContext context) => GetmarksBooksCubit(),
-        ),
-        BlocProvider<AddToCartCubit>(
-          create: (BuildContext context) => AddToCartCubit(),
-        ),
-        BlocProvider<SignInCubit>(
-          create: (BuildContext context) => SignInCubit(),
-        ),
-        BlocProvider<SignUpCubit>(
-          create: (BuildContext context) => SignUpCubit(),
-        ),
-        BlocProvider<UpdateUserProfileCubit>(
-          create: (BuildContext context) => UpdateUserProfileCubit(),
-        ),
-        BlocProvider<GetUserInfoCubit>(
-          create: (BuildContext context) => GetUserInfoCubit(),
-        ),
+      
       ],
       child: MaterialApp(
         locale: _locale,
